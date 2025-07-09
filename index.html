@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="images/rklogo.png" />
+  <title>RKMatrix - Software Solutions</title>
+  <meta name="description" content="RKMatrix delivers innovative software solutions including websites, Android and iOS apps tailored for modern businesses." />
+  <meta name="keywords" content="RKMatrix, software solutions, website development, android app, ios app, mobile applications" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="images/rklogo.png" alt="RKMatrix Logo" />
+      <div class="logo-text">
+        <h1>RKMatrix</h1>
+        <p>Your Digital Vision, Our Matrix of Code.</p>
+      </div>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav>
+      <a href="#about" onclick="setActive(this)">About</a>
+      <a href="#services" onclick="setActive(this)">Services</a>
+      <a href="#contact" onclick="setActive(this)">Contact</a>
+    </nav>
+  </header>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#about" onclick="setActive(this); toggleMenu()">About</a>
+    <a href="#services" onclick="setActive(this); toggleMenu()">Services</a>
+    <a href="#contact" onclick="setActive(this); toggleMenu()">Contact</a>
+  </div>
+
+  <section class="hero">
+    <div class="hero-overlay">
+      <h2>Your Digital Vision, Our Matrix of Code.</h2>
+      <p>Building future-ready web and mobile applications.</p>
+    </div>
+    <div class="hero-image">
+      <img src="images/rkBanner.png" alt="Team working on software solutions" />
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About RKMatrix</h2>
+    <ul style="max-width: 800px; margin: auto; font-size: 18px; color: #ccc; list-style-type: disc; padding-left: 20px;">
+      <li>RKMatrix is a modern software development company based on innovation and precision.</li>
+      <li>We specialize in building high-quality websites, Android apps, and iOS applications.</li>
+      <li>Our team transforms ideas into scalable, secure, and high-performance digital products.</li>
+      <li>We prioritize user experience, ensuring intuitive and visually appealing interfaces.</li>
+      <li>Our process blends design thinking, modern frameworks, and agile development practices.</li>
+    </ul>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="service">
+        <i class="fas fa-code" style="font-size: 48px; color: #00bcd4;"></i>
+        <h3>Website Development</h3>
+        <p>Custom websites, responsive layouts, content management, and e-commerce integration.</p>
+      </div>
+      <div class="service">
+        <i class="fab fa-android" style="font-size: 48px; color: #4caf50;"></i>
+        <h3>Android App Development</h3>
+        <p>Powerful mobile applications with smooth functionality and engaging interfaces.</p>
+      </div>
+      <div class="service">
+        <i class="fab fa-apple" style="font-size: 48px; color: #999;"></i>
+        <h3>iOS App Development</h3>
+        <p>Elegant and intuitive iOS apps with seamless user experience and reliable performance.</p>
+      </div>
+      <div class="service">
+        <i class="fas fa-pencil-ruler" style="font-size: 48px; color: #ff9800;"></i>
+        <h3>UI/UX Design</h3>
+        <p>Clean, user-centered designs that combine aesthetics with usability and flow.</p>
+      </div>
+      <div class="service">
+        <i class="fas fa-palette" style="font-size: 48px; color: #e91e63;"></i>
+        <h3>Branding & Identity</h3>
+        <p>Strategic brand creation through visuals, messaging, and design that reflects your voice.</p>
+      </div>
+      <div class="service">
+        <i class="fas fa-tools" style="font-size: 48px; color: #607d8b;"></i>
+        <h3>Maintenance & Support</h3>
+        <p>Reliable updates, technical assistance, and long-term support to keep things running smoothly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding: 60px 20px;">
+    <h2 style="text-align: center;">Contact Us</h2>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1100px; margin: 40px auto 0 auto; align-items: flex-start; gap: 40px;">
+      <div style="flex: 1 1 400px; text-align: left; color: #ccc; font-size: 18px;">
+        <p><i class="fas fa-envelope" style="color: #00bcd4; margin-right: 10px;"></i><strong>Email:</strong> <a href="mailto:rkmatrixpvt@gmail.com" style="color: #00bcd4;">RKMatrixPvt@gmail.com</a></p>
+        <p><i class="fas fa-phone" style="color: #4caf50; margin-right: 10px;"></i><strong>Phone:</strong> +91-9582161944 ,+91-8127444881 </p>
+        <p><i class="fas fa-map-marker-alt" style="color: #e91e63; margin-right: 10px;"></i><strong>Location:</strong> Baberu, Banda, Uttar Pradesh, India</p>
+      </div>
+      <div style="flex: 1 1 600px;">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14530.51815820794!2d80.7045!3d25.5475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfbf4f4f4f4f5%3A0xabcdef1234567890!2sBaberu%2C%20Uttar%20Pradesh%20210121%2C%20India!5e0!3m2!1sen!2sin!4v1680000000000" 
+          width="100%" height="300" style="border: 0; border-radius: 8px;" allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 RKMatrix. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobileNav').classList.toggle('active');
+    }
+
+    function setActive(element) {
+      document.querySelectorAll('nav a, .mobile-nav a').forEach(link => link.classList.remove('active'));
+      element.classList.add('active');
+    }
+  </script>
+</body>
+</html>
