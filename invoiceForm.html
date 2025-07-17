@@ -243,6 +243,7 @@
   </div>
 
   <script>
+  document.addEventListener('contextmenu', event => event.preventDefault());
   // ⏳ Login check + session timeout
   const loginTime = parseInt(localStorage.getItem("loginTime"), 10);
   const currentTime = Date.now();
