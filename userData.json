@@ -2,6 +2,7 @@
   {
     "userId": "1",
     "username": "RKMatrix",
+    "name": "Rahul Mishra",
     "email": "RKMatrixPvt@gmail.com",
     "password": "RKMatrix@1234",
     "isActive": true,
@@ -12,6 +13,7 @@
   {
     "userId": "2",
     "username": "MLAPrinting",
+    "name": "Amit",
     "email": "RKMatrixPvt@gmail.com",
     "password": "MLAPrinting@1234",
     "isActive": true,
@@ -19,4 +21,3 @@
     "logo": "https://example.com/logo.png",
     "phone": "+91-1234567890"
   }
-]
