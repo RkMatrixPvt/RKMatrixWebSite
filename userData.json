@@ -5,6 +5,9 @@
         "name": "Rahul Mishra",
         "email": "RKMatrixPvt@gmail.com",
         "password": "RKMatrix@1234",
+        "websiteName": "RKMatrix",
+        "websiteUrl": "",
+        "websiteTagline": "",
         "isActive": true,
         "organizationname": "RKMatrix",
         "logo": "https://example.com/logo.png",
@@ -15,10 +18,13 @@
         "username": "MLAPrinting",
         "name": "Amit",
         "email": "RKMatrixPvt@gmail.com",
+        "websiteName": "MLA Printing Hub",
+        "websiteUrl": "https://rkmatrixpvt.github.io/MLAPrintingHub/",
+        "websiteTagline": "Your Imagination, Our Printing.",
         "password": "MLAPrinting@1234",
         "isActive": true,
         "organizationname": "MLA Printing Hub",
-        "logo": "https://example.com/logo.png",
+        "logo": "https://rkmatrixpvt.github.io/MLAPrintingHub/images/logo/MlaPrintingHubLogo.png",
         "phone": "+91-1234567890"
     }
 ]
