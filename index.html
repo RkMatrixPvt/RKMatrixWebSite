@@ -1,160 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="RKMatrix delivers innovative software solutions..." />
-  
-<!-- RKMatrix Organization Schema Markup -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "RKMatrix",
-    "url": "https://www.rkmatrix.com",
-    "logo": "https://www.rkmatrix.com/images/rklogo.png",
-    "founder": "RKMatrix", 
-    "foundingDate": "2023",
-    "location": {
-  "@type": "Place",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "FH4, Happy Homes Apartment, Juhi Kalan, Saket Nagar",
-    "addressLocality": "Kanpur",
-    "addressRegion": "Uttar Pradesh",
-    "postalCode": "208014",
-    "addressCountry": "India"
-  }
-},
-    "description": "RKMatrix is a software solutions company specializing in innovative web and mobile application development, delivering professional and creative digital experiences."
-  }
-  </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RKMatrix delivers innovative software solutions..." />
 
-<meta name="keywords" content="RKMatrix, software development, web development, mobile apps, Android development, iOS development, UI/UX design, website design, branding, software solutions, custom websites, mobile application development, startup tech, digital agency, IT company India, Baberu tech, Banda software, full-stack development, app developers India, responsive websites, modern web design, payroll software, HR management system, employee payroll, payroll automation, salary processing, leave management, attendance tracking, HR software India, payroll services for small business, payroll app development" />
-  <meta name="robots" content="index, follow" />
-  <link rel="icon" type="image/png" href="images/rklogo.png" />
-  <title>RKMatrix - Innovative Software Solutions for Modern Businesses</title>
-  <meta name="description" content="RKMatrix delivers innovative software solutions including websites, Android and iOS apps tailored for modern businesses." />
-  <meta name="keywords" content="RKMatrix, software solutions, website development, android app, ios app, mobile applications" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
+    <!-- RKMatrix Organization Schema Markup -->
+    <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "RKMatrix",
+            "url": "https://www.rkmatrix.com",
+            "logo": "https://www.rkmatrix.com/images/rklogo.png",
+            "founder": "RKMatrix",
+            "foundingDate": "2023",
+            "location": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "FH4, Happy Homes Apartment, Juhi Kalan, Saket Nagar",
+            "addressLocality": "Kanpur",
+            "addressRegion": "Uttar Pradesh",
+            "postalCode": "208014",
+            "addressCountry": "India"
+          }
+        },
+            "description": "RKMatrix is a software solutions company specializing in innovative web and mobile application development, delivering professional and creative digital experiences."
+          }
+    </script>
+
+    <meta name="keywords" content="RKMatrix, software development, web development, mobile apps, Android development, iOS development, UI/UX design, website design, branding, software solutions, custom websites, mobile application development, startup tech, digital agency, IT company India, Baberu tech, Banda software, full-stack development, app developers India, responsive websites, modern web design, payroll software, HR management system, employee payroll, payroll automation, salary processing, leave management, attendance tracking, HR software India, payroll services for small business, payroll app development" />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" type="image/png" href="images/rklogo.png" />
+    <title>RKMatrix - Innovative Software Solutions for Modern Businesses</title>
+    <meta name="description" content="RKMatrix delivers innovative software solutions including websites, Android and iOS apps tailored for modern businesses." />
+    <meta name="keywords" content="RKMatrix, software solutions, website development, android app, ios app, mobile applications" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="images/rklogo.png" alt="RKMatrix Logo" />
-      <div class="logo-text">
-        <h1>RKMatrix</h1>
-        <p>Your Digital Vision, Our Matrix of Code.</p>
-      </div>
-    </div>
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <nav>
-      <a href="#about" onclick="setActive(this)">About</a>
-      <a href="#services" onclick="setActive(this)">Services</a>
-      <a href="#contact" onclick="setActive(this)">Contact</a>
-    </nav>
-  </header>
 
-  <div class="mobile-nav" id="mobileNav">
-    <a href="#about" onclick="setActive(this); toggleMenu()">About</a>
-    <a href="#services" onclick="setActive(this); toggleMenu()">Services</a>
-    <a href="#contact" onclick="setActive(this); toggleMenu()">Contact</a>
-  </div>
+    <header id="mainHeader">
+        <div class="logo">
+            <img src="images/rklogo.png" alt="RKMatrix Logo" />
+            <div class="logo-text">
+                <h1>RKMatrix</h1>
+                <p>Your Digital Vision, Our Matrix of Code.</p>
+            </div>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav>
+            <a href="#home" onclick="setActive(this)">Home</a>
+            <a href="#about" onclick="setActive(this)">About</a>
+            <a href="#services" onclick="setActive(this)">Services</a>
+            <a href="#contact" onclick="setActive(this)">Contact</a>
+        </nav>
 
-  <section class="hero">
-    <div class="hero-overlay">
-      <h2>Your Digital Vision, Our Matrix of Code.</h2>
-      <p>Building future-ready web and mobile applications.</p>
-    </div>
-    <div class="hero-image">
-      <img src="images/rkBanner.png" alt="Team working on software solutions" />
-    </div>
-  </section>
+        <!-- Moved mobile nav inside header -->
+        <div class="mobile-nav" id="mobileNav">
+            <a href="#home" onclick="setActive(this); toggleMenu()">Home</a>
+            <a href="#about" onclick="setActive(this); toggleMenu()">About</a>
+            <a href="#services" onclick="setActive(this); toggleMenu()">Services</a>
+            <a href="#contact" onclick="setActive(this); toggleMenu()">Contact</a>
+        </div>
+    </header>
 
-  <section id="about">
-    <h2>About RKMatrix</h2>
-    <ul style="max-width: 800px; margin: auto; font-size: 18px; color: #ccc; list-style-type: disc; padding-left: 20px;">
-      <li>RKMatrix is a modern software development company based on innovation and precision.</li>
-      <li>We specialize in building high-quality websites, Android apps, and iOS applications.</li>
-      <li>Our team transforms ideas into scalable, secure, and high-performance digital products.</li>
-      <li>We prioritize user experience, ensuring intuitive and visually appealing interfaces.</li>
-      <li>Our process blends design thinking, modern frameworks, and agile development practices.</li>
-    </ul>
-  </section>
+    <section class="hero" id="home">
+        <div class="hero-overlay">
+            <h2>Your Digital Vision, Our Matrix of Code.</h2>
+            <p>Building future-ready web and mobile applications.</p>
+        </div>
+        <div class="hero-image">
+            <img src="images/rkBanner.png" alt="Team working on software solutions" />
+        </div>
+    </section>
 
-  <section id="services">
-    <h2>Our Services</h2>
-    <div class="services">
-      <div class="service">
-        <i class="fas fa-code" style="font-size: 48px; color: #00bcd4;"></i>
-        <h3>Website Development</h3>
-        <p>Custom websites, responsive layouts, content management, and e-commerce integration.</p>
-      </div>
-      <div class="service">
-        <i class="fab fa-android" style="font-size: 48px; color: #4caf50;"></i>
-        <h3>Android App Development</h3>
-        <p>Powerful mobile applications with smooth functionality and engaging interfaces.</p>
-      </div>
-      <div class="service">
-        <i class="fab fa-apple" style="font-size: 48px; color: #999;"></i>
-        <h3>iOS App Development</h3>
-        <p>Elegant and intuitive iOS apps with seamless user experience and reliable performance.</p>
-      </div>
-      <div class="service">
-        <i class="fas fa-pencil-ruler" style="font-size: 48px; color: #ff9800;"></i>
-        <h3>UI/UX Design</h3>
-        <p>Clean, user-centered designs that combine aesthetics with usability and flow.</p>
-      </div>
-      <div class="service">
-        <i class="fas fa-palette" style="font-size: 48px; color: #e91e63;"></i>
-        <h3>Branding & Identity</h3>
-        <p>Strategic brand creation through visuals, messaging, and design that reflects your voice.</p>
-      </div>
-      <div class="service">
-        <i class="fas fa-tools" style="font-size: 48px; color: #607d8b;"></i>
-        <h3>Maintenance & Support</h3>
-        <p>Reliable updates, technical assistance, and long-term support to keep things running smoothly.</p>
-      </div>
-    </div>
-  </section>
+    <section id="about">
+        <h2>About RKMatrix</h2>
+        <ul style="max-width: 800px; margin: auto; font-size: 18px; color: #ccc; list-style-type: disc; padding-left: 20px;">
+            <li>RKMatrix is a modern software development company based on innovation and precision.</li>
+            <li>We specialize in building high-quality websites, Android apps, and iOS applications.</li>
+            <li>Our team transforms ideas into scalable, secure, and high-performance digital products.</li>
+            <li>We prioritize user experience, ensuring intuitive and visually appealing interfaces.</li>
+            <li>Our process blends design thinking, modern frameworks, and agile development practices.</li>
+        </ul>
+    </section>
 
-  <section id="contact" style="padding: 60px 20px;">
-    <h2 style="text-align: center;">Contact Us</h2>
-    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1100px; margin: 40px auto 0 auto; align-items: flex-start; gap: 40px;">
-      <div style="flex: 1 1 400px; text-align: left; color: #ccc; font-size: 18px;">
-        <p><i class="fas fa-envelope" style="color: #00bcd4; margin-right: 10px;"></i><strong>Email:</strong> <a href="mailto:rkmatrixpvt@gmail.com" style="color: #00bcd4;">RKMatrixPvt@gmail.com</a></p>
-        <p><i class="fas fa-phone" style="color: #4caf50; margin-right: 10px;"></i><strong>Phone:</strong> +91-8115122893 ,+91-7398789686 ,+91-9582161944</p>
-        <p><i class="fas fa-map-marker-alt" style="color: #e91e63; margin-right: 10px;"></i><strong>Location:</strong> FH4, Happy Homes Apartment, Juhi Kalan, Saket Nagar, Kanpur, Uttar Pradesh 208014, India</p>
-      </div>
-      <div style="flex: 1 1 600px;">
-       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3572.8107148290087!2d80.3109638752543!3d26.429584276938396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c475095b8044f%3A0xff2aa500d52556d3!2sHappy%20Homes%20Apartment!5e0!3m2!1sen!2sin!4v1752341102497!5m2!1sen!2sin"  
-          width="100%" height="300" style="border: 0; border-radius: 8px;" allowfullscreen="" loading="lazy">
-        </iframe>
-      </div>
-    </div>
-  </section>
+    <section id="services">
+        <h2>Our Services</h2>
+        <div class="services">
+            <div class="service">
+                <i class="fas fa-code" style="font-size: 48px; color: #00bcd4;"></i>
+                <h3>Website Development</h3>
+                <p>Custom websites, responsive layouts, content management, and e-commerce integration.</p>
+            </div>
+            <div class="service">
+                <i class="fab fa-android" style="font-size: 48px; color: #4caf50;"></i>
+                <h3>Android App Development</h3>
+                <p>Powerful mobile applications with smooth functionality and engaging interfaces.</p>
+            </div>
+            <div class="service">
+                <i class="fab fa-apple" style="font-size: 48px; color: #999;"></i>
+                <h3>iOS App Development</h3>
+                <p>Elegant and intuitive iOS apps with seamless user experience and reliable performance.</p>
+            </div>
+            <div class="service">
+                <i class="fas fa-pencil-ruler" style="font-size: 48px; color: #ff9800;"></i>
+                <h3>UI/UX Design</h3>
+                <p>Clean, user-centered designs that combine aesthetics with usability and flow.</p>
+            </div>
+            <div class="service">
+                <i class="fas fa-palette" style="font-size: 48px; color: #e91e63;"></i>
+                <h3>Branding & Identity</h3>
+                <p>Strategic brand creation through visuals, messaging, and design that reflects your voice.</p>
+            </div>
+            <div class="service">
+                <i class="fas fa-tools" style="font-size: 48px; color: #607d8b;"></i>
+                <h3>Maintenance & Support</h3>
+                <p>Reliable updates, technical assistance, and long-term support to keep things running smoothly.</p>
+            </div>
+        </div>
+    </section>
 
-   <footer>
-  <p>&copy; 2025 RKMatrix. All rights reserved. | <a href="RKMatrixTermsAndConditions.html" style="color: #00bcd4;">Terms & Conditions</a></p>
-</footer>
+    <section id="contact" style="padding: 60px 20px;">
+        <h2 style="text-align: center;">Contact Us</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1100px; margin: 40px auto 0 auto; align-items: flex-start; gap: 40px;">
+            <div style="flex: 1 1 400px; text-align: left; color: #ccc; font-size: 18px;">
+                <p><i class="fas fa-envelope" style="color: #00bcd4; margin-right: 10px;"></i><strong>Email:</strong> <a href="mailto:rkmatrixpvt@gmail.com" style="color: #00bcd4;">RKMatrixPvt@gmail.com</a></p>
+                <p><i class="fas fa-phone" style="color: #4caf50; margin-right: 10px;"></i><strong>Phone:</strong> +91-8115122893 ,+91-7398789686 ,+91-9582161944</p>
+                <p><i class="fas fa-map-marker-alt" style="color: #e91e63; margin-right: 10px;"></i><strong>Location:</strong> FH4, Happy Homes Apartment, Juhi Kalan, Saket Nagar, Kanpur, Uttar Pradesh 208014, India</p>
+            </div>
+            <div style="flex: 1 1 600px;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3572.8107148290087!2d80.3109638752543!3d26.429584276938396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c475095b8044f%3A0xff2aa500d52556d3!2sHappy%20Homes%20Apartment!5e0!3m2!1sen!2sin!4v1752341102497!5m2!1sen!2sin"
+                        width="100%" height="300" style="border: 0; border-radius: 8px;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
 
+    <footer>
+        <p>&copy; 2025 RKMatrix. All rights reserved. | <a href="RKMatrixTermsAndConditions.html" style="color: #00bcd4;">Terms & Conditions</a></p>
+    </footer>
 
-  <script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    function toggleMenu() {
-      document.getElementById('mobileNav').classList.toggle('active');
-    }
+    <script>
+        function toggleMenu() {
+            const header = document.getElementById('mainHeader');
+            header.classList.toggle('active');
+        }
 
-    function setActive(element) {
-      document.querySelectorAll('nav a, .mobile-nav a').forEach(link => link.classList.remove('active'));
-      element.classList.add('active');
-    }
-  </script>
+        function setActive(element) {
+            document.querySelectorAll('nav a, .mobile-nav a').forEach(link => link.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // ✅ Automatically highlight "About" link on page load (both mobile and desktop)
+        window.addEventListener('DOMContentLoaded', () => {
+            const desktopLink = document.querySelector('nav a[href="#home"]');
+            const mobileLink = document.querySelector('.mobile-nav a[href="#home"]');
+
+            // Activate both if needed
+            if (desktopLink) desktopLink.classList.add('active');
+            if (mobileLink) mobileLink.classList.add('active');
+        });
+    </script>
 </body>
 </html>
