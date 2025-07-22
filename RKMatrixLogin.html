@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RKMatrix Login For  ZeroDB Invoice Generator</title>
+    <link rel="icon" type="image/png" href="images/rklogo.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #f57c00, #ff9800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-container {
+            background: #fff;
+            width: 100%;
+            max-width: 420px;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+            .login-container img {
+                width: 100px;
+                margin-bottom: -37px;
+            }
+
+        h2 {
+            margin-bottom: 25px;
+            color: #f57c00;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+
+            input:focus {
+                border-color: #f57c00;
+                outline: none;
+            }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #f57c00;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            button:hover {
+                background-color: #e65100;
+            }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #999;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="images/rklogo.png" alt="RKMatrix Logo" />
+        <h2>Welcome to RKMatrix</h2>
+        <input type="text" id="username" placeholder="Enter Username" required autocomplete="off" />
+        <input type="password" id="password" placeholder="Enter Password" required />
+        <button onclick="login()">Login</button>
+        <div class="footer">© 2025 RKMatrix. All rights reserved.</div>
+    </div>
+    <script src="js/userAuth.js"></script>
+</body>
+</html>
