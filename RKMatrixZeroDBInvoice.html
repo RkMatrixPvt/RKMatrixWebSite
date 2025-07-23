@@ -181,8 +181,43 @@
 
         .button-row {
             display: flex;
-            gap: 10px; /* space between buttons */
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+            .button-row button {
+                padding: 6px 12px;
+                font-size: 13px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background 0.3s ease;
+            }
+
+        .add-item-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+            .add-item-btn:hover {
+                background-color: #45a049;
+            }
+
+        .submit-btn {
+            background-color: #007BFF;
+            color: white;
+        }
+
+            .submit-btn:hover {
+                background-color: #0056b3;
+            }
+
+        /*.button-row {
+            display: flex;
+            gap: 10px;*/ /* space between buttons */
+        /*margin-top: 20px;
         }
 
         .submit-btn, .add-item-btn, .download-btn {
@@ -210,7 +245,7 @@
 
             .add-item-btn:hover {
                 background-color: #2e7d32;
-            }
+            }*/
 
         #invoice {
             display: none;
@@ -301,6 +336,12 @@
             display: block;
             margin: 25px auto 0;
             background-color: #039be5;
+            padding: 6px 12px;
+            font-size: 13px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
         }
 
         .delete-btn {
@@ -898,14 +939,21 @@
             }
         }
 
+        .status-select, .input-box, input[type="date"], input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 6px 10px;
+            font-size: 14px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
 
-        .status-select {
+        /*.status-select {
             padding: 15px 20px;
             border-radius: 5px;
             border: 1px solid #ccc;
             font-weight: bold;
             min-width: 180px;
-        }
+        }*/
 
         .status-container {
             display: flex;
@@ -933,6 +981,37 @@
             font-weight: bold;
             font-size: 14px;
         }
+
+        .status-box-pppaymnet {
+            background-color: #e5ce35;
+            margin-top: 10px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .two-column-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: -15px;
+            flex-wrap: wrap;
+        }
+
+            .two-column-row label {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                font-size: 13px;
+            }
+
+            .two-column-row input {
+                padding: 8px 8px;
+                font-size: 13px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
     </style>
 
 </head>
@@ -1006,43 +1085,86 @@
             <div id="rkMatrixInvoiceSection" style="display: none;">
                 <h2>ZeroDB Invoice Generator</h2>
                 <form id="invoiceForm">
-                    <label>Invoice Number: <input type="text" name="invoiceNumber" required></label>
-                    <label>Invoice Date: <input type="date" name="invoiceDate" required></label>
-                    <label>Client Name: <input type="text" name="client" required></label>
-                    <label>Project: <input type="text" name="project" required></label>
-                    <label>Scope: <input type="text" name="scope" required></label>
+                    <div class="two-column-row">
+                        <label>Invoice Number: <input type="text" name="invoiceNumber" required></label>
+                        <label>Invoice Date: <input type="date" name="invoiceDate" required></label>
+                    </div>
+                    <div class="two-column-row">
+                        <label>GST No. (If Applicable): <input type="text" name="invoiceGst"></label>
+                        <label>
+                            Gst %:
+                            <select id="invoiceGstPercent" class="status-select">
+                                <option value="">-- Select Gst % --</option>
+                                <option value="0">0 %</option>
+                                <option value="5">5 %</option>
+                                <option value="12">12 %</option>
+                                <option value="18">18 %</option>
+                                <option value="28">28 %</option>
+                                <option value="3">3 %</option>
+                                <option value="0.25">0.25 %</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="two-column-row">
+                        <label>Client Name: <input type="text" name="client" required></label>
+                        <label>Project: <input type="text" name="project" required></label>
+                    </div>
+                    <div class="two-column-row">
+                        <label>Scope: <input type="text" name="scope" required></label>
+                    </div>
+                    <div class="two-column-row">
+                        <label>
+                            Payment Status:
+                            <select id="PaymentStatusDropDown" class="status-select">
+                                <option value="">-- Select Payment Status --</option>
+                                <option value="Paid">Paid</option>
+                                <option value="Unpaid">Unpaid</option>
+                                <option value="Partially Paid">Partially Paid</option>
+                                <!--<option value="Overdue">Overdue</option>-->
+                            </select>
+                        </label>
+                        <label id="mainPartialAmountWrapper" style="display: none;">
+                            Enter Partial Paid Amount:
+                            <input type="number" id="mainPartialPaidAmount" min="0" class="input-box" placeholder="Enter amount..." />
+                        </label>
+
+                    </div>
 
                     <h4>Invoice Items</h4>
                     <table id="itemTable">
-                        <tr><th>Description</th><th>Amount (₹)</th><th>Action</th></tr>
+                        <tr><th>Description</th><th>Amount (₹)</th><th></th></tr>
                         <tr>
                             <td><input type="text" name="desc[]" required></td>
                             <td><input type="number" name="amount[]" required></td>
                             <td><button type="button" class="delete-btn" onclick="deleteRow(this)">❌</button></td>
                         </tr>
                     </table>
-                    <label>
-                        Payment Status: <select id="PaymentStatusDropDown" class="status-select">
-                            <option value="">-- Select Payment Status --</option>
-                            <option value="Paid">Paid</option>
-                            <option value="Unpaid">Unpaid</option>
-                            <option value="Partially Paid">Partially Paid</option>
-                            <!--<option value="Overdue">Overdue</option>-->
-                        </select>
-                    </label>
-
+                    <!--<label>
+    Payment Status: <select id="PaymentStatusDropDown" class="status-select">
+        <option value="">-- Select Payment Status --</option>
+        <option value="Paid">Paid</option>
+        <option value="Unpaid">Unpaid</option>
+        <option value="Partially Paid">Partially Paid</option>-->
+                    <!--<option value="Overdue">Overdue</option>-->
+                    <!--</select>
+    </label>-->
                     <!-- Hidden input field shown only for Partially Paid -->
-                    <div id="mainPartialAmountWrapper" style="display: none; margin-top: 10px;">
-                        <label>
-                            Enter Partial Paid Amount:
-                            <input type="number" id="mainPartialPaidAmount" min="0" class="input-box" placeholder="Enter amount..." />
-                        </label>
-                    </div>
+                    <!--<div id="mainPartialAmountWrapper" style="display: none; margin-top: 10px;">
+        <label>
+            Enter Partial Paid Amount:
+            <input type="number" id="mainPartialPaidAmount" min="0" class="input-box" placeholder="Enter amount..." />
+        </label>
+    </div>-->
 
                     <div class="button-row">
+                        <button type="button" class="add-item-btn" onclick="addItem()">➕ Add Item</button><br>
+                        <button type="submit" class="submit-btn">📄 Preview Invoice</button>
+                    </div>
+
+                    <!--<div class="button-row">
                         <button type="button" class="add-item-btn" onclick="addItem()">Add Item</button><br>
                         <button type="submit" class="submit-btn">Priview Invoice</button>
-                    </div>
+                    </div>-->
                 </form>
 
                 <div id="invoice">
@@ -1074,8 +1196,7 @@
                     <div class="footer">
                         <p>Thank you for choosing RKMatrix!</p>
                         <p>
-                            <a href="https://www.rkMatrix.co.in" target="_blank">www.rkMatrix.co.in</a> |
-                            RKMatrixPvt@gmail.com
+                            <a href="https://www.rkMatrix.co.in" target="_blank">www.rkMatrix.co.in</a> | RKMatrixPvt@gmail.com
                         </p>
                     </div>
                     <button class="download-btn" onclick="printInvoice()">🖨️ Download PDF</button>
@@ -1084,13 +1205,53 @@
             </div>
 
             <div id="commonInvoiceGeneratorSection">
-                <h2>ZeroDB Invoice Generator</h2>
+                <h2 style="margin-bottom:0px !important">ZeroDB Invoice Generator</h2>
                 <form id="commonInvoiceForm">
-                    <label>Invoice Number: <input type="text" name="commonInvoiceNumber" required></label>
-                    <label>Invoice Date: <input type="date" name="commonInvoiceDate" required></label>
-                    <label>Invoice to: <input type="text" name="commonIClient" required></label>
+                    <div class="two-column-row">
+                        <label>Invoice Number: <input type="text" name="commonInvoiceNumber" required></label>
+                        <label>Invoice Date: <input type="date" name="commonInvoiceDate" required></label>
+                    </div>
+                    <div class="two-column-row">
+                        <label>GST No. (If Applicable): <input type="text" name="commonGst"></label>
+                        <label>
+                            Gst %:
+                            <select id="commonGstPercent" class="status-select">
+                                <option value="">-- Select Gst % --</option>
+                                <option value="0">0 %</option>
+                                <option value="5">5 %</option>
+                                <option value="12">12 %</option>
+                                <option value="18">18 %</option>
+                                <option value="28">28 %</option>
+                                <option value="3">3 %</option>
+                                <option value="0.25">0.25 %</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="two-column-row">
+                        <label>Invoice to: <input type="text" name="commonIClient" required></label>
+                        <label>Contect Details: <input type="text" name="commonContectDetails" required></label>
+                    </div>
+                    <div class="two-column-row">
+                        <label>Address: <input type="text" name="commonAddress" required></label>
+                    </div>
 
-                    <h4>Invoice Items</h4>
+                    <div class="two-column-row">
+                        <label>
+                            Payment Status:
+                            <select id="commonPaymentStatusDropDown" class="status-select">
+                                <option value="">-- Select Payment Status --</option>
+                                <option value="Paid">Paid</option>
+                                <option value="Unpaid">Unpaid</option>
+                                <option value="Partially Paid">Partially Paid</option>
+                            </select>
+                        </label>
+                        <label id="partialAmountWrapper" style="display: none;">
+                            Enter Partial Paid Amount:
+                            <input type="number" id="partialPaidAmount" min="0" class="input-box" placeholder="Enter amount..." />
+                        </label>
+
+                    </div>
+                    <h4 style="margin-bottom: -16px !important">Invoice Items</h4>
                     <table id="commonItemTable">
                         <tr>
                             <th>Item Description</th>
@@ -1108,26 +1269,9 @@
                         </tr>
                     </table>
 
-                    <label>
-                        Payment Status: <select id="commonPaymentStatusDropDown" class="status-select">
-                            <option value="">-- Select Payment Status --</option>
-                            <option value="Paid">Paid</option>
-                            <option value="Unpaid">Unpaid</option>
-                            <option value="Partially Paid">Partially Paid</option>
-                            <!--<option value="Overdue">Overdue</option>-->
-                        </select>
-                    </label>
-                    <!-- Hidden input field shown only for Partially Paid -->
-                    <div id="partialAmountWrapper" style="display: none; margin-top: 10px;">
-                        <label>
-                            Enter Partial Paid Amount:
-                            <input type="number" id="partialPaidAmount" min="0" class="input-box" placeholder="Enter amount..." />
-                        </label>
-                    </div>
-
                     <div class="button-row">
-                        <button type="button" class="add-item-btn" onclick="commonAddItem()">Add Item</button><br>
-                        <button type="submit" class="submit-btn">Priview Invoice</button>
+                        <button type="button" class="add-item-btn" onclick="commonAddItem()">➕ Add Item</button><br>
+                        <button type="submit" class="submit-btn">📄 Preview Invoice</button>
                     </div>
 
                 </form>
@@ -1143,13 +1287,13 @@
 
                     <h2>Invoice</h2>
                     <div class="info" id="commonInvoiceInfo"></div>
-                    <div class="status-container" id="commonPaymnetStatus">
-
-                    </div>
+                    <div class="status-container" id="commonPaymnetStatus"></div>
 
 
                     <table>
-                        <tr><th style="width:130px">Invoice to</th><td id="invoiceto"></td></tr>
+                        <tr><th style="width:150px">Invoice to :</th><td id="invoiceto"></td></tr>
+                        <tr><th style="width:150px">Contact Details :</th><td id="contactDetails"></td></tr>
+                        <tr><th style="width:150px">Address :</th><td id="address"></td></tr>
                     </table>
 
                     <div class="info" id="paymnetStatus"></div>
@@ -1168,6 +1312,7 @@
                     <div class="footer">
                         <p id="orgThanksMsg"></p>
                         <p id="orgFotterDetails"></p>
+                        <p>Service provided by <a href="https://www.rkMatrix.co.in" target="_blank">RKMatrix</a></p>
                     </div>
                     <button class="download-btn" onclick="printCommonInvoice()">🖨️ Download PDF</button>
                 </div>
@@ -1183,9 +1328,9 @@
     <script src="js/loginCheck.js"></script>
     <script>
 
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-        });
+        //document.addEventListener('contextmenu', function (e) {
+        //    e.preventDefault();
+        //});
 
         const org = '';
         // 👋 Greeting logic
@@ -1238,12 +1383,6 @@
             const correspondingLink = document.querySelector(`.menu-link[data-section="${savedSection}"]`);
             showSection(savedSection, correspondingLink);
         });
-
-        //// 👋 Greeting logic
-        //let greeting = `👋 Hello ${name}`;
-        //if (hour < 12) greeting += " Good Morning 🌅";
-        //else if (hour < 18) greeting += " Good Afternoon ☀️";
-        //else greeting += " Good Evening 🌙";
 
         // 💡 Tip of the day
         const tips = [
@@ -1343,7 +1482,7 @@
             row.insertCell(1).innerHTML = '<input type="number" name="price[]" required />';
             row.insertCell(2).innerHTML = '<input type="number" name="qty[]" required />';
             /* row.insertCell(3).innerHTML = '<input type="number" name="amount[]" required />';*/
-            row.insertCell(4).innerHTML = '<button type="button" class="delete-btn" onclick="commonDeleteRow(this)">❌</button>';
+            row.insertCell(3).innerHTML = '<button type="button" class="delete-btn" onclick="commonDeleteRow(this)">❌</button>';
         }
 
         // ❌ Delete invoice item row
@@ -1442,7 +1581,7 @@
                     totalRow.insertCell(0).innerHTML = '<strong>Total</strong>';
                     totalRow.insertCell(1).innerHTML = `<strong>₹${total.toFixed(2)}</strong>`;
                 }
-                
+
                 document.getElementById('invoice').style.display = 'block';
             }
             else { document.getElementById('commonInvoice').style.display = 'block'; }
@@ -1455,6 +1594,15 @@
             debugger;
             const authData = JSON.parse(localStorage.getItem("authData"));
             if (!authData || !authData.organizationname) return;
+
+            const gstNumber = formData.get("commonGst");
+            const gstPercent = document.getElementById("commonGstPercent").value;
+            if (gstNumber !== "") {
+                if (gstPercent === "" || isNaN(gstPercent) || parseFloat(gstPercent) <= 0) {
+                    alert("Please enter a valid positive number for GST Percent.");
+                    return; // stop execution
+                }
+            }
 
             const paymentStatus = document.getElementById("commonPaymentStatusDropDown").value;
             const partialPaidAmount = document.getElementById("partialPaidAmount").value;
@@ -1489,18 +1637,29 @@
             const orgTaglineEl = document.getElementById("orgTagline");
             const orgLogoEl = document.getElementById("orgLogo");
 
-
-            document.getElementById('commonInvoiceInfo').innerHTML =
-                `<strong>Invoice No:</strong> ${invoiceNumber} &nbsp;&nbsp; <strong>Date:</strong> ${formattedDate}`;
+            if (gstNumber == "") {
+                document.getElementById('commonInvoiceInfo').innerHTML =
+                    `<strong>Invoice No:</strong> ${invoiceNumber} &nbsp;&nbsp; <strong>Date:</strong> ${formattedDate}`;
+            } else {
+                document.getElementById('commonInvoiceInfo').innerHTML =
+                    `<strong>Invoice No:</strong> ${invoiceNumber} &nbsp;&nbsp; <strong>Date:</strong> ${formattedDate} </br> <strong>GST No:</strong> ${gstNumber}`;
+            }
 
             if (paymentStatus === "Paid") {
                 document.getElementById('commonPaymnetStatus').innerHTML = `<div class="status-box-paid" ><strong>Payment Status:</strong> <span>${paymentStatus}</span> &nbsp;&nbsp; <strong>Payment Date:</strong> ${formattedDate}</div>`;
-            } else {
+            } else if (paymentStatus === "Partially Paid") {
+                document.getElementById('commonPaymnetStatus').innerHTML = `<div class="status-box-pppaymnet" ><strong>Payment Status:</strong> <span>${paymentStatus}</span> &nbsp;&nbsp; <strong>Payment Date:</strong> ${formattedDate}</div>`;
+            }
+            else {
                 document.getElementById('commonPaymnetStatus').innerHTML = `<div class="status-box-other" ><strong>Payment Status:</strong> <span>${paymentStatus}</span> &nbsp;&nbsp; <strong>Payment Date:</strong> ${formattedDate}</div>`;
             }
 
+
+
             document.getElementById('orgName').innerHTML = orgName;
             document.getElementById('invoiceto').innerText = formData.get('commonIClient');
+            document.getElementById('contactDetails').innerText = '+91-' + formData.get('commonContectDetails');
+            document.getElementById('address').innerText = formData.get('commonAddress');
             document.getElementById('orgTagline').innerHTML = orgTagLine;
             orgLogoEl.src = orgLogo;
             orgLogoEl.alt = orgWebSiteName + ' ' + 'Logo';
@@ -1516,21 +1675,19 @@
 
             // Reset table headers
             summaryTable.innerHTML = `<tr>
-                                                                 <th>SL.</th>
-                                                                 <th>Item Description</th>
-                                                                 <th>Price (₹)</th>
-                                                                 <th>Qty.</th>
-                                                                 <th>Amount (₹)</th>
-                                                               </tr>`;
+                                                                                                 <th>SL.</th>
+                                                                                                 <th>Item Description</th>
+                                                                                                 <th>Price (₹)</th>
+                                                                                                 <th>Qty.</th>
+                                                                                                 <th>Amount (₹)</th>
+                                                                                               </tr>`;
 
             let total = 0;
-
             descList.forEach((desc, i) => {
                 const price = parseFloat(priceList[i]) || 0;
                 const qty = parseFloat(qtyList[i]) || 0;
                 const amount = price * qty;
                 //const amount = parseFloat(amountList[i]) || 0;
-
                 const row = summaryTable.insertRow();
                 row.insertCell(0).innerText = i + 1;
                 row.insertCell(1).innerText = desc;
@@ -1540,45 +1697,45 @@
 
                 total += amount;
             });
+            if (gstNumber !== "") {
+                const gstPercent = parseFloat(document.getElementById("commonGstPercent").value) || 0;
+                const gstAmount = (total * gstPercent) / 100;
+                total = total + gstAmount;
+                // GST row
+                const gstRow = summaryTable.insertRow();
+                gstRow.insertCell(0).innerHTML = '<strong>GST (' + gstPercent + '%)</strong>';
+                gstRow.insertCell(1).innerHTML = '--';
+                gstRow.insertCell(2).innerHTML = '0';
+                gstRow.insertCell(3).innerHTML = '0';
+                gstRow.insertCell(4).innerHTML = `<strong>₹${gstAmount.toFixed(2)}</strong>`;
+            }
+            const totalRow = summaryTable.insertRow();
+            totalRow.insertCell(0).innerHTML = '<strong>Total</strong>';
+            totalRow.insertCell(1).innerHTML = '--';
+            totalRow.insertCell(2).innerHTML = '0';
+            totalRow.insertCell(3).innerHTML = '0';
+            totalRow.insertCell(4).innerHTML = `<strong>₹${total.toFixed(2)}</strong>`;
+
 
             // Final total row
             if (paymentStatus === "Partially Paid") {
-
-                const totalRow = summaryTable.insertRow();
-                totalRow.insertCell(0).innerHTML = '<strong>Total</strong>';
-                totalRow.insertCell(1).innerHTML = '--';
-                totalRow.insertCell(2).innerHTML = '--';
-                totalRow.insertCell(3).innerHTML = '--';
-                totalRow.insertCell(4).innerHTML = `<strong>₹${total.toFixed(2)}</strong>`;
-
                 const paidAmount = parseFloat(document.getElementById("partialPaidAmount").value) || 0;
                 const dueAmount = total - paidAmount;
 
                 const paidRow = summaryTable.insertRow();
                 paidRow.insertCell(0).innerHTML = '<strong style="color: green;">Paid Amount</strong>';
                 paidRow.insertCell(1).innerHTML = '--';
-                paidRow.insertCell(2).innerHTML = '--';
-                paidRow.insertCell(3).innerHTML = '--';
+                paidRow.insertCell(2).innerHTML = '0';
+                paidRow.insertCell(3).innerHTML = '0';
                 paidRow.insertCell(4).innerHTML = `<strong style="color: green;"">₹${paidAmount.toFixed(2)}</strong>`;
 
                 const dueRow = summaryTable.insertRow();
                 dueRow.insertCell(0).innerHTML = '<strong style="color: red;">Due Amount</strong>';
                 dueRow.insertCell(1).innerHTML = '--';
-                dueRow.insertCell(2).innerHTML = '--';
-                dueRow.insertCell(3).innerHTML = '--';
+                dueRow.insertCell(2).innerHTML = '0';
+                dueRow.insertCell(3).innerHTML = '0';
                 dueRow.insertCell(4).innerHTML = `<strong style="color: red;"">₹${dueAmount.toFixed(2)}</strong>`;
-            } else {
-                const totalRow = summaryTable.insertRow();
-                totalRow.insertCell(0).innerHTML = '<strong>Total</strong>';
-                totalRow.insertCell(1).innerHTML = '--';
-                totalRow.insertCell(2).innerHTML = '--';
-                totalRow.insertCell(3).innerHTML = '--';
-                totalRow.insertCell(4).innerHTML = `<strong>₹${total.toFixed(2)}</strong>`;
             }
-
-
-
-
             document.getElementById('commonInvoice').style.display = 'block';
 
         });
