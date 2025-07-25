@@ -29,16 +29,17 @@ body {
     color: var(--text-color);
 }
 
+
 header {
     position: sticky;
     top: 0;
     z-index: 999;
     background-color: var(--section-color);
-    padding: 20px 40px;
+    padding: 20px 15px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-wrap: nowrap;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -65,6 +66,7 @@ header {
     color: #d16a44;
 }
 
+/* Desktop nav */
 nav {
     display: flex;
     gap: 20px;
@@ -85,6 +87,7 @@ nav {
             color: #fff;
         }
 
+/* Hamburger icon */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -99,11 +102,16 @@ nav {
         transition: all 0.3s;
     }
 
+/* Mobile nav menu */
 .mobile-nav {
     display: none;
     flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
     width: 100%;
     background-color: var(--section-color);
+    z-index: 998;
 }
 
     .mobile-nav a {
@@ -119,9 +127,33 @@ nav {
             color: white;
         }
 
-    .mobile-nav.active {
+/* Responsive rules */
+@media (max-width: 768px) {
+    header {
+        flex-wrap: wrap;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .menu-toggle {
         display: flex;
     }
+
+    header.active .mobile-nav {
+        display: flex;
+    }
+
+    .logo {
+        flex: 1;
+    }
+
+    .menu-toggle {
+        align-self: flex-end;
+    }
+}
+
 
 .hero {
     background: linear-gradient(135deg, #ff4500, #1c1c1c);
@@ -222,6 +254,162 @@ footer {
     padding: 30px 20px;
     font-size: 14px;
 }
+/* Floating contact Bar - right */
+.clean-contect-bar {
+    position: fixed;
+    top: 40%;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    z-index: 9999;
+    animation: slideInRight 0.6s ease forwards;
+}
+
+    .clean-contect-bar a {
+        font-size: 22px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 50%;
+        background-color: #ff4500;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .clean-contect-bar a:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 12px rgba(0,0,0,0.25);
+        }
+
+.whatsapp {
+    color: white;
+}
+
+.contact-icon {
+    color: white;
+}
+
+@keyframes slideInRight {
+    from {
+        right: -60px;
+        opacity: 0;
+    }
+
+    to {
+        right: 0;
+        opacity: 1;
+    }
+}
+
+/* Floating Social Bar - left */
+.clean-social-bar {
+    position: fixed;
+    top: 40%;
+    left: 0;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    z-index: 9999;
+    animation: slideInLeft 0.6s ease forwards;
+}
+
+    .clean-social-bar a {
+        font-size: 22px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 50%;
+        background-color: #ff4500;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .clean-social-bar a:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 12px rgba(0,0,0,0.25);
+        }
+
+/* Brand Colors */
+.facebook {
+    color: #ffffff;
+}
+
+.twitter {
+    color: #ffffff;
+}
+
+.linkedin {
+    color: #ffffff;
+}
+
+
+/* Slide-in animation */
+@keyframes slideInLeft {
+    from {
+        left: -60px;
+        opacity: 0;
+    }
+
+    to {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+/* Toggle button for mobile */
+.social-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 45px;
+    height: 45px;
+    background-color: #ff4500;
+    color: #ffffff;
+    font-size: 24px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* Show toggle button only on small screens */
+@media (max-width: 768px) {
+    .clean-social-bar {
+        display: none;
+    }
+
+        .clean-social-bar.active {
+            display: flex;
+        }
+
+    .social-toggle {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    .clean-contect-bar {
+        display: none;
+    }
+
+        .clean-contect-bar.active {
+            display: flex;
+        }
+
+    .social-toggle {
+        display: flex;
+    }
+}
 
 @media (max-width: 768px) {
     nav {
@@ -255,23 +443,47 @@ footer {
         }
 }
 
-@media (max-width: 768px) {
-    .mobile-nav {
+
+#festivalBanner {
+    display: none;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 8px;
+    margin: 10px;
+    position: relative;
+    animation: fadeIn 1s ease-in-out;
+}
+
+    #festivalBanner button {
         position: absolute;
-        top: 100%;
-        right: 0;
-        width: 100%;
-        display: none;
-        z-index: 998;
+        right: 10px;
+        top: 10px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
     }
 
-    header {
-        position: sticky;
-        top: 0;
-        background-color: var(--section-color);
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
     }
 
-        header.active .mobile-nav {
-            display: flex;
-        }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    #festivalBanner {
+        font-size: 0.95rem;
+        padding: 12px 15px;
+    }
 }
