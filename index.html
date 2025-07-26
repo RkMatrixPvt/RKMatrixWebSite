@@ -79,24 +79,28 @@
 
     <section class="hero" id="home">
         <div class="hero-overlay">
-            <h2>Your Digital Vision, Our Matrix of Code.</h2>
-            <p>Building future-ready web and mobile applications.</p>
+            <h2 id="heroHeading">Your Digital Vision, Our Matrix of Code.</h2>
+            <p id="heroSubheading">Building future-ready web and mobile applications.</p>
         </div>
         <div class="hero-image">
-            <img src="images/rkBanner.png" alt="Team working on software solutions" />
+            <img id="heroImage" src="images/rkBanner.png" alt="Team working on software solutions" />
         </div>
     </section>
 
 
-
-    <section id="about">
+    <section id="about" data-aos="fade-up">
         <h2>About RKMatrix</h2>
         <ul style="max-width: 800px; margin: auto; font-size: 18px; color: #ccc; list-style-type: disc; padding-left: 20px;">
-            <li>RKMatrix is a modern software development company based on innovation and precision.</li>
-            <li>We specialize in building high-quality websites, Android apps, and iOS applications.</li>
-            <li>Our team transforms ideas into scalable, secure, and high-performance digital products.</li>
-            <li>We prioritize user experience, ensuring intuitive and visually appealing interfaces.</li>
-            <li>Our process blends design thinking, modern frameworks, and agile development practices.</li>
+            <li data-aos="fade-right">RKMatrix is a modern software development company based on innovation and precision.</li>
+            <li data-aos="fade-left">We specialize in building high-quality websites, Android apps, and iOS applications.</li>
+            <li data-aos="fade-right">Our team transforms ideas into scalable, secure, and high-performance digital products.</li>
+            <li data-aos="fade-left">We prioritize user experience, ensuring intuitive and visually appealing interfaces.</li>
+            <li data-aos="fade-right">Our process blends design thinking, modern frameworks, and agile development practices.</li>
+            <li data-aos="fade-left">We offer complete digital solutions — from branding and UI/UX to full-stack development.</li>
+            <li data-aos="fade-right">Our team stays updated with the latest trends in AI, cloud computing, and mobile tech.</li>
+            <li data-aos="fade-left">RKMatrix believes in long-term partnerships through transparency and timely delivery.</li>
+            <li data-aos="fade-right">We have served diverse industries including education, retail, and solar energy.</li>
+            <li data-aos="fade-left">Client satisfaction and continuous improvement are at the core of everything we do.</li>
         </ul>
     </section>
 
@@ -166,7 +170,7 @@
             <div style="flex: 1 1 500px;">
                 <div style="color: #ccc; font-size: 18px; margin-bottom: 20px;">
                     <p><i class="fas fa-envelope" style="color: #00bcd4; margin-right: 10px;"></i><strong>Email:</strong> <a href="mailto:rkmatrixpvt@gmail.com" style="color: #00bcd4;">RKMatrixPvt@gmail.com</a></p>
-                    <p><i class="fas fa-phone" style="color: #4caf50; margin-right: 10px;"></i><strong>Phone:</strong> +91-8115122893, +91-7398789686, +91-9582161944</p>
+                    <p><i class="fas fa-phone" style="color: #4caf50; margin-right: 10px;"></i><strong>Phone:</strong>+91-9235867399, +91-9582161944, +91-8115122893</p>
                     <p><i class="fas fa-map-marker-alt" style="color: #e91e63; margin-right: 10px;"></i><strong>Location:</strong> FH4, Happy Homes Apartment, Juhi Kalan, Saket Nagar, Kanpur, Uttar Pradesh 208014, India</p>
                 </div>
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3572.8107148290087!2d80.3109638752543!3d26.429584276938396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c475095b8044f%3A0xff2aa500d52556d3!2sHappy%20Homes%20Apartment!5e0!3m2!1sen!2sin!4v1752341102497!5m2!1sen!2sin"
@@ -179,9 +183,7 @@
     <!-- Social Icons -->
     <div class="clean-social-bar" id="socialBar">
         <a href="https://www.facebook.com/profile.php?id=100063928155512" class="facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <!--<a href="https://twitter.com" class="twitter" target="_blank"><i class="fab fa-twitter"></i></a>-->
         <a href="https://www.linkedin.com/company/glitter-technologies-pvt-ltd/?viewAsMember=true" class="linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        <!--<a href="https://wa.me/918115122893" class="whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>-->
     </div>
 
     <!-- Mobile Toggle Button -->
@@ -190,7 +192,7 @@
     </div>
 
     <div class="clean-contect-bar" id="contactBar">
-        <a href="#" class="whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://wa.me/919235867399" class="whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
         <a href="#contact" class="contact-icon" title="Contact Us">
             <i class="fas fa-envelope"></i>
         </a>
@@ -199,12 +201,73 @@
     <footer>
         <p>&copy; 2025 RKMatrix. All rights reserved. | <a href="RKMatrixTermsAndConditions.html" style="color: #00bcd4;">Terms & Conditions</a></p>
     </footer>
-
     <script>
 
         document.addEventListener('contextmenu', function (e) {
             e.preventDefault();
         });
+
+        const heroSlides = [
+            {
+                heading: "Everything You Need to Go Digital.",
+                subheading: "Websites, apps, portals — done professionally and on time.",
+                image: "images/rkBanner.png"
+            },
+            {
+                heading: "Innovate with RKMatrix.",
+                subheading: "Smart software solutions that scale with your business.",
+                image: "images/rkBanner_2.png"
+            },
+            {
+                heading: "Reliable. Scalable. Secure.",
+                subheading: "Technology that works for you — today and tomorrow.",
+                image: "images/rkBanner_4.png"
+            }
+        ];
+
+        let currentIndex = 0;
+        const headingEl = document.getElementById("heroHeading");
+        const subheadingEl = document.getElementById("heroSubheading");
+        const imageEl = document.getElementById("heroImage");
+
+        function updateHeroSlide() {
+            // Fade out
+            headingEl.classList.add("fade-out");
+            subheadingEl.classList.add("fade-out");
+            imageEl.classList.add("fade-out");
+
+            // Wait for fade-out to complete
+            setTimeout(() => {
+                const slide = heroSlides[currentIndex];
+
+                // Update content
+                headingEl.textContent = slide.heading;
+                subheadingEl.textContent = slide.subheading;
+                imageEl.src = slide.image;
+
+                // Remove fade-out
+                headingEl.classList.remove("fade-out");
+                subheadingEl.classList.remove("fade-out");
+                imageEl.classList.remove("fade-out");
+
+                // Add fade-in
+                headingEl.classList.add("fade-in");
+                subheadingEl.classList.add("fade-in");
+                imageEl.classList.add("fade-in");
+
+                // Remove fade-in after animation
+                setTimeout(() => {
+                    headingEl.classList.remove("fade-in");
+                    subheadingEl.classList.remove("fade-in");
+                    imageEl.classList.remove("fade-in");
+                }, 800);
+
+                // Move to next slide
+                currentIndex = (currentIndex + 1) % heroSlides.length;
+            }, 100); // Delay equal to fade-out duration
+        }
+
+        setInterval(updateHeroSlide, 15000); // Every 10 seconds
 
 
 
@@ -303,44 +366,44 @@
             const phone = form.Phone.value;
             const message = form.Message.value;
             const date = new Date().toLocaleString();
-            const to = 'rkmatrixcontactus@gmail.com';
+            const to = 'rkmatrixpvt@gmail.com';
             const subject = `New Contact Form Submission from ${name} – ${date} – RKMatrix`;
             // Build your HTML message
             const htmlBody = `<!DOCTYPE html>
-                                                              <html>
-                                                                <head>
-                                                                  <style>
-                                                                    .box {
-                                                                      border: 2px solid #4CAF50;
-                                                                      padding: 20px;
-                                                                      font-family: Arial;
-                                                                      border-radius: 10px;
-                                                                      background: #f9f9f9;
-                                                                    }
-                                                                    h1 {
-                                                                      color: #4CAF50;
-                                                                    }
-                                                                    p {
-                                                                      font-size: 16px;
-                                                                      color: #333;
-                                                                      margin: 6px 0;
-                                                                    }
-                                                                  </style>
-                                                                </head>
-                                                                <body>
-                                                                  <div class="box">
-                                                                    <h1>📩 New Inquiry Received</h1>
-                                                                    <p><strong>Name:</strong> ${name}</p>
-                                                                    <p><strong>Email:</strong> ${email}</p>
-                                                                    <p><strong>Phone:</strong> ${phone}</p>
-                                                                    <p><strong>Message:</strong></p>
-                                                                    <p>${message}</p>
-                                                                    <p><strong>Date:</strong> ${date}</p>
-                                                                    <hr>
-                                                                    <p>This message was submitted via the RKMatrix Contact Us page.</p>
-                                                                  </div>
-                                                                </body>
-                                                              </html>`;
+                                                                          <html>
+                                                                            <head>
+                                                                              <style>
+                                                                                .box {
+                                                                                  border: 2px solid #4CAF50;
+                                                                                  padding: 20px;
+                                                                                  font-family: Arial;
+                                                                                  border-radius: 10px;
+                                                                                  background: #f9f9f9;
+                                                                                }
+                                                                                h1 {
+                                                                                  color: #4CAF50;
+                                                                                }
+                                                                                p {
+                                                                                  font-size: 16px;
+                                                                                  color: #333;
+                                                                                  margin: 6px 0;
+                                                                                }
+                                                                              </style>
+                                                                            </head>
+                                                                            <body>
+                                                                              <div class="box">
+                                                                                <h1>📩 New Inquiry Received</h1>
+                                                                                <p><strong>Name:</strong> ${name}</p>
+                                                                                <p><strong>Email:</strong> ${email}</p>
+                                                                                <p><strong>Phone:</strong> ${phone}</p>
+                                                                                <p><strong>Message:</strong></p>
+                                                                                <p>${message}</p>
+                                                                                <p><strong>Date:</strong> ${date}</p>
+                                                                                <hr>
+                                                                                <p>This message was submitted via the RKMatrix Contact Us page.</p>
+                                                                              </div>
+                                                                            </body>
+                                                                          </html>`;
 
             // Encode for safe transmission
             const body = encodeURIComponent(htmlBody);
