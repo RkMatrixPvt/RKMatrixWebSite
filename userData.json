@@ -26,5 +26,20 @@
         "organizationname": "MLA Printing Hub",
         "logo": "https://rkmatrixpvt.github.io/MLAPrintingHub/images/logo/MlaPrintingHubLogo.png",
         "phone": "+91-1234567890"
+    },
+    {
+        "userId": "3",
+        "username": "Mooneeva",
+        "name": "Poornima",
+        "email": "houseofmooneeva@gmail.com",
+        "websiteName": "Mooneèva",
+        "websiteUrl": "",
+        "websiteTagline": "Your Aura, Your Style",
+        "password": "Mooneeva@1234",
+        "isActive": true,
+        "organizationname": "Mooneèva",
+        "logo": "https://rkmatrixpvt.github.io/MooneevaEcartSite/assets/images/logo.png",
+        "phone": "+91 63829 19132"
     }
+
 ]
