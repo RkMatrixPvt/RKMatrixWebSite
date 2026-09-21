@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box_v32 - पूर्ण और दुरुस्त ज्योतिष डेटा</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 10pt;
+            font-weight: bold;
+            text-align: center;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 10px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 780px;
+            box-sizing: border-box;
+        }
+        .top-buttons {
+            margin-bottom: 15px;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+        }
+        .top-buttons button {
+            font-family: Arial;
+            font-size: 10pt;
+            font-weight: bold;
+            padding: 6px 10px;
+            cursor: pointer;
+            background-color: #e0e0e0;
+            border: 1px solid #777;
+            border-radius: 4px;
+        }
+        .top-buttons button:hover {
+            background-color: #d0d0d0;
+        }
+        .popup-btn {
+            background-color: #4CAF50 !important;
+            color: white !important;
+        }
+        .popup-btn:hover {
+            background-color: #45a049 !important;
+        }
+        
+        .box-wrapper {
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        th, td {
+            border: 2px solid #000;
+            padding: 4px 2px;
+            font-family: Arial;
+            font-size: 9pt;
+            font-weight: bold;
+            text-align: center;
+            vertical-align: middle;
+            word-break: break-word;
+        }
+        th {
+            background-color: #ffeb3b;
+            color: #000;
+        }
+        .yellow-bg {
+            background-color: #ffeb3b;
+        }
+        .red-text {
+            color: red;
+            font-weight: bold;
+        }
+        .set-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3px;
+            font-family: Arial;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        .set-title {
+            text-align: left;
+        }
+        .box-title {
+            background-color: #e0e0e0;
+            padding: 4px;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-align: left;
+            border-left: 4px solid #4CAF50;
+            padding-left: 8px;
+        }
+        .pravesh-select {
+            font-family: Arial;
+            font-size: 9pt;
+            font-weight: bold;
+            color: red;
+            background-color: #ffeb3b;
+            border: 1px solid #000;
+            padding: 2px;
+            cursor: pointer;
+            text-align: center;
+        }
+        select, input {
+            font-family: Arial;
+            font-size: 9pt;
+            font-weight: bold;
+            width: 100%;
+            padding: 2px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .fixed-val {
+            font-weight: bold;
+            text-align: center;
+        }
+        .formula-result {
+            font-family: Arial;
+            font-size: 9pt;
+            font-weight: bold;
+            color: #000;
+            background-color: #fff;
+            text-align: center;
+        }
+        .auto-cell {
+            font-family: Arial;
+            font-size: 9pt;
+            font-weight: bold;
+            color: #000;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        
+        .seham-row {
+            background-color: #55ff55 !important; 
+            text-align: center !important;
+        }
+        .seham-name-cell {
+            color: red !important;
+            font-weight: bold !important;
+            text-align: center !important;
+            background-color: #55ff55 !important;
+        }
+        .seham-val-cell {
+            font-family: Arial;
+            font-size: 9pt;
+            font-weight: bold;
+            color: #000;
+            background-color: #55ff55 !important;
+            text-align: center;
+        }
+
+        @media print {
+            body {
+                background-color: #fff;
+                margin: 0;
+                padding: 0;
+            }
+            .top-buttons, .popup-action-bar {
+                display: none !important;
+            }
+            .container {
+                box-shadow: none;
+                width: 100%;
+                padding: 0;
+            }
+            .print-page-break {
+                page-break-after: always;
+                break-after: page;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="top-buttons">
+        <button onclick="triggerUndo()">Undo</button>
+        <button onclick="triggerRedo()">Redo</button>
+        <button onclick="openPopupSet5()" class="popup-btn">5-सेट पॉपअप (4-बॉक्स)</button>
+        <button onclick="window.print()">Print PDF</button>
+        <button onclick="saveLastDataManually()" style="background-color: #2196F3; color: white;">Save Data</button>
+    </div>
+
+    <script>
+        const rashisList = ["मेष", "वृष", "मिथुन", "कर्क", "सिंह", "कन्या", "तुला", "वृश्चिक", "धनु", "मकर", "कुंभ", "मीन"];
+        
+        const rashiValues = {
+            "मेष": 0, "वृष": 1, "मिथुन": 2, "कर्क": 3, "सिंह": 4, "कन्या": 5,
+            "तुला": 6, "वृश्चिक": 7, "वृशि्चक": 7, "धनु": 8, "मकर": 9, "कुंभ": 10, "कुम्भ": 10, "मीन": 11
+        };
+
+        const presetData = {
+            "उच्च सूर्य": { rashi: "मेष", ansh: 10, kala: 0, vik: 0 },
+            "उच्च चंद्रमा": { rashi: "वृष", ansh: 3, kala: 0, vik: 0 },
+            "उच्च मंगल": { rashi: "मकर", ansh: 28, kala: 0, vik: 0 },
+            "उच्च बुध": { rashi: "कन्या", ansh: 15, kala: 0, vik: 0 },
+            "उच्च गुरु": { rashi: "कर्क", ansh: 5, kala: 0, vik: 0 },
+            "उच्च शुक्र": { rashi: "मीन", ansh: 27, kala: 0, vik: 0 },
+            "उच्च शनि": { rashi: "तुला", ansh: 20, kala: 0, vik: 0 },
+            "उच्च राहु": { rashi: "मिथुन", ansh: 15, kala: 0, vik: 0 },
+            "उच्च केतु": { rashi: "धनु", ansh: 15, kala: 0, vik: 0 },
+            "नीच सूर्य": { rashi: "तुला", ansh: 10, kala: 0, vik: 0 },
+            "नीच चंद्रमा": { rashi: "वृश्चिक", ansh: 3, kala: 0, vik: 0 },
+            "नीच मंगल": { rashi: "कर्क", ansh: 28, kala: 0, vik: 0 },
+            "नीच बुध": { rashi: "मीन", ansh: 15, kala: 0, vik: 0 },
+            "नीच गुरु": { rashi: "मकर", ansh: 5, kala: 0, vik: 0 },
+            "नीच शुक्र": { rashi: "कन्या", ansh: 27, kala: 0, vik: 0 },
+            "नीच शनि": { rashi: "मेष", ansh: 20, kala: 0, vik: 0 },
+            "नीच राहु": { rashi: "धनु", ansh: 15, kala: 0, vik: 0 },
+            "नीच केतु": { rashi: "मिथुन", ansh: 15, kala: 0, vik: 0 },
+            "मेष राशि": { rashi: "मेष", ansh: 0, kala: 0, vik: 0 },
+            "वृष राशि": { rashi: "वृष", ansh: 0, kala: 0, vik: 0 },
+            "मिथुन राशि": { rashi: "मिथुन", ansh: 0, kala: 0, vik: 0 },
+            "कर्क राशि": { rashi: "कर्क", ansh: 0, kala: 0, vik: 0 },
+            "सिंह राशि": { rashi: "सिंह", ansh: 0, kala: 0, vik: 0 },
+            "कन्या राशि": { rashi: "कन्या", ansh: 0, kala: 0, vik: 0 },
+            "तुला राशि": { rashi: "तुला", ansh: 0, kala: 0, vik: 0 },
+            "वृश्चिक राशि": { rashi: "वृश्चिक", ansh: 0, kala: 0, vik: 0 },
+            "धनु राशि": { rashi: "धनु", ansh: 0, kala: 0, vik: 0 },
+            "मकर राशि": { rashi: "मकर", ansh: 0, kala: 0, vik: 0 },
+            "कुंभ राशि": { rashi: "कुंभ", ansh: 0, kala: 0, vik: 0 },
+            "मीन राशि": { rashi: "मीन", ansh: 0, kala: 0, vik: 0 },
+            "मेष आधी": { rashi: "मेष", ansh: 15, kala: 0, vik: 0 },
+            "वृष आधी": { rashi: "वृष", ansh: 15, kala: 0, vik: 0 },
+            "मिथुन आधी": { rashi: "मिथुन", ansh: 15, kala: 0, vik: 0 },
+            "कर्क आधी": { rashi: "कर्क", ansh: 15, kala: 0, vik: 0 },
+            "सिंह आधी": { rashi: "सिंह", ansh: 15, kala: 0, vik: 0 },
+            "कन्या आधी": { rashi: "कन्या", ansh: 15, kala: 0, vik: 0 },
+            "तुला आधी": { rashi: "तुला", ansh: 15, kala: 0, vik: 0 },
+            "वृश्चिक आधी": { rashi: "वृश्चिक", ansh: 15, kala: 0, vik: 0 },
+            "धनु आधी": { rashi: "धनु", ansh: 15, kala: 0, vik: 0 },
+            "मकर आधी": { rashi: "मकर", ansh: 15, kala: 0, vik: 0 },
+            "कुंभ आधी": { rashi: "कुंभ", ansh: 15, kala: 0, vik: 0 },
+            "मीन आधी": { rashi: "मीन", ansh: 15, kala: 0, vik: 0 }
+        };
+
+        function getFullDropdownOptions(selectedVal) {
+            const list = [
+                "सूर्य", "चंद्रमा", "मंगल", "बुध", "गुरु", "शुक्र", "शनि", "राहु", "केतु", "लग्न",
+                "भाव-2", "भाव-3", "भाव-4", "भाव-5", "भाव-6", "भाव-7", "भाव-8", "भाव-9", "भाव-10", "भाव-11", "भाव-12",
+                "लॉर्ड-1", "लॉर्ड-2", "लॉर्ड-3", "लॉर्ड-4", "लॉर्ड-5", "लॉर्ड-6", "लॉर्ड-7", "लॉर्ड-8", "लॉर्ड-9", "लॉर्ड-10", "लॉर्ड-11", "लॉर्ड-12",
+                "उच्च सूर्य", "उच्च चंद्रमा", "उच्च मंगल", "उच्च बुध", "उच्च गुरु", "उच्च शुक्र", "उच्च शनि", "उच्च राहु", "उच्च केतु",
+                "नीच सूर्य", "नीच चंद्रमा", "नीच मंगल", "नीच बुध", "नीच गुरु", "नीच शुक्र", "नीच शनि", "नीच राहु", "नीच केतु",
+                "मेष राशि", "वृष राशि", "मिथुन राशि", "कर्क राशि", "सिंह राशि", "कन्या राशि", "तुला राशि", "वृश्चिक राशि", "धनु राशि", "मकर राशि", "कुंभ राशि", "मीन राशि",
+                "मेष आधी", "वृष आधी", "मिथुन आधी", "कर्क आधी", "सिंह आधी", "कन्या आधी", "तुला आधी", "वृश्चिक आधी", "धनु आधी", "मकर आधी", "कुंभ आधी", "मीन आधी",
+                "प्रसव सहम", "पुण्य सहम", "विधया सहम", "प्रसव सहम M", "पिता सहम", "माता सहम", "भाई-बहिन सहम", "संतान सहम", "विवाह सहम", "प्रीति सहम", "परदारा सहम", "श्रद्धा सहम", "बंधन सहम", "अश्व सहम", "व्यापार सहम", "मकान सहम", "मृत्यु सहम", "संताप सहम", "दूसरा विवाह", "कंसिव सहम", "रोग सहम", "कर्म सहम", "लाभ सहम", "अर्थ सहम", "कर्जा सहम", "वणिक सहम", "गौरव सहम", "विदेश यात्रा", "यश सहम", "मृत्यु सहम 2", "वाहन सहम", "लाभ सहम 2", "अर्थ सहम 2", "बन्धु सहम", "महात्म्य सहम", "आशा सहम", "भाग्य सहम", "पुरुष सहम", "स्त्री सहम", "जीवन सहम", "महिला मित्र", "पुरुष मित्र", "केवल पुरुष", "केवल स्त्री", "गुरुता सहम", "उपाय सहम", "पुण्य सहम 2", "विवाह सहम 2", "मृत्यु सहम 3",
+                "बड़े भाई बहिन", "छोटे भाई बहिन",
+                "सूर्य से पहला", "सूर्य से दूसरा", "सूर्य से तीसरा", "सूर्य से चौथा", "सूर्य से पांचवां", "सूर्य से छठा", "सूर्य से सातवां", "सूर्य से आठवां", "सूर्य से नौवां", "सूर्य से दसवां", "सूर्य से ग्यारहवां", "सूर्य से बारहवां",
+                "चंद्रमा से पहला", "चंद्रमा से दूसरा", "चंद्रमा से तीसरा", "चंद्रमा से चौथा", "चंद्रमा से पांचवां", "चंद्रमा से छठा", "चंद्रमा से सातवां", "चंद्रमा से आठवां", "चंद्रमा से नौवां", "चंद्रमा से दसवां", "चंद्रमा से ग्यारहवां", "चंद्रमा से बारहवां",
+                "मंगल से पहला", "मंगल से दूसरा", "मंगल से तीसरा", "मंगल से चौथा", "मंगल से पांचवां", "मंगल से छठा", "मंगल से सातवां", "मंगल से आठवां", "मंगल से नौवां", "मंगल से दसवां", "मंगल से ग्यारहवां", "मंगल से बारहवां",
+                "बुध से पहला", "बुध से दूसरा", "बुध से तीसरा", "बुध से चौथा", "बुध से पांचवां", "बुध से छठा", "बुध से सातवां", "बुध से आठवां", "बुध से नौवां", "बुध से दसवां", "बुध से ग्यारहवां", "बुध से बारहवां",
+                "गुरु से पहला", "गुरु से दूसरा", "गुरु से तीसरा", "गुरु से चौथा", "गुरु से पांचवां", "गुरु से छठा", "गुरु से सातवां", "गुरु से आठवां", "गुरु से नौवां", "गुरु से दसवां", "गुरु से ग्यारहवां", "गुरु से बारहवां",
+                "शुक्र से पहला", "शुक्र से दूसरा", "शुक्र से तीसरा", "शुक्र से चौथा", "शुक्र से पांचवां", "शुक्र से छठा", "शुक्र से सातवां", "शुक्र से आठवां", "शुक्र से नौवां", "शुक्र से दसवां", "शुक्र से ग्यारहवां", "शुक्र से बारहवां",
+                "शनि से पहला", "शनि से दूसरा", "शनि से तीसरा", "शनि से चौथा", "शनि से पांचवां", "शनि से छठा", "शनि से सातवां", "शनि से आठवां", "शनि से नौवां", "शनि से दसवां", "शनि से ग्यारहवां", "शनि से बारहवां",
+                "राहु से पहला", "राहु से दूसरा", "राहु से तीसरा", "राहु से चौथा", "राहु से पांचवां", "राहु से छठा", "राहु से सातवां", "राहु से आठवां", "राहु से नौवां", "राहु से दसवां", "राहु से ग्यारहवां", "राहु से बारहवां",
+                "केतु से पहला", "केतु से दूसरा", "केतु से तीसरा", "केतु से चौथा", "केतु से पांचवां", "केतु से छठा", "केतु से सातवां", "केतु से आठवां", "केतु से नौवां", "केतु से दसवां", "केतु से ग्यारहवां", "केतु से बारहवां",
+                "लॉर्ड-1 से पहला", "लॉर्ड-1 से दूसरा", "लॉर्ड-1 से तीसरा", "लॉर्ड-1 से चौथा", "लॉर्ड-1 से पांचवां", "लॉर्ड-1 से छठा", "लॉर्ड-1 से सातवां", "लॉर्ड-1 से आठवां", "लॉर्ड-1 से नौवां", "लॉर्ड-1 से दसवां", "लॉर्ड-1 से ग्यारहवां", "लॉर्ड-1 से बारहवां",
+                "लॉर्ड-2 से पहला", "लॉर्ड-2 से दूसरा", "लॉर्ड-2 से तीसरा", "लॉर्ड-2 से चौथा", "लॉर्ड-2 से पांचवां", "लॉर्ड-2 से छठा", "लॉर्ड-2 से सातवां", "लॉर्ड-2 से आठवां", "लॉर्ड-2 से नौवां", "लॉर्ड-2 से दसवां", "लॉर्ड-2 से ग्यारहवां", "लॉर्ड-2 से बारहवां",
+                "लॉर्ड-3 से पहला", "लॉर्ड-3 से दूसरा", "लॉर्ड-3 से तीसरा", "लॉर्ड-3 से चौथा", "लॉर्ड-3 से पांचवां", "लॉर्ड-3 से छठा", "लॉर्ड-3 से सातवां", "लॉर्ड-3 से आठवां", "लॉर्ड-3 से नौवां", "लॉर्ड-3 से दसवां", "लॉर्ड-3 से ग्यारहवां", "लॉर्ड-3 से बारहवां",
+                "लॉर्ड-4 से पहला", "लॉर्ड-4 से दूसरा", "लॉर्ड-4 से तीसरा", "लॉर्ड-4 से चौथा", "लॉर्ड-4 से पांचवां", "लॉर्ड-4 से छठा", "लॉर्ड-4 से सातवां", "लॉर्ड-4 से आठवां", "लॉर्ड-4 से नौवां", "लॉर्ड-4 से दसवां", "लॉर्ड-4 से ग्यारहवां", "लॉर्ड-4 से बारहवां",
+                "लॉर्ड-5 से पहला", "लॉर्ड-5 से दूसरा", "लॉर्ड-5 से तीसरा", "लॉर्ड-5 से चौथा", "लॉर्ड-5 से पांचवां", "लॉर्ड-5 से छठा", "लॉर्ड-5 से सातवां", "लॉर्ड-5 से आठवां", "लॉर्ड-5 से नौवां", "लॉर्ड-5 से दसवां", "लॉर्ड-5 से ग्यारहवां", "लॉर्ड-5 से बारहवां",
+                "लॉर्ड-6 से पहला", "लॉर्ड-6 से दूसरा", "लॉर्ड-6 से तीसरा", "लॉर्ड-6 से चौथा", "लॉर्ड-6 से पांचवां", "लॉर्ड-6 से छठा", "लॉर्ड-6 से सातवां", "लॉर्ड-6 से आठवां", "लॉर्ड-6 से नौवां", "लॉर्ड-6 से दसवां", "लॉर्ड-6 से ग्यारहवां", "लॉर्ड-6 से बारहवां",
+                "लॉर्ड-7 से पहला", "लॉर्ड-7 से दूसरा", "लॉर्ड-7 से तीसरा", "लॉर्ड-7 से चौथा", "लॉर्ड-7 से पांचवां", "लॉर्ड-7 से छठा", "लॉर्ड-7 से सातवां", "लॉर्ड-7 से आठवां", "लॉर्ड-7 से नौवां", "लॉर्ड-7 से दसवां", "लॉर्ड-7 से ग्यारहवां", "लॉर्ड-7 से बारहवां",
+                "लॉर्ड-8 से पहला", "लॉर्ड-8 से दूसरा", "लॉर्ड-8 से तीसरा", "लॉर्ड-8 से चौथा", "लॉर्ड-8 से पांचवां", "लॉर्ड-8 से छठा", "लॉर्ड-8 से सातवां", "लॉर्ड-8 से आठवां", "लॉर्ड-8 से नौवां", "लॉर्ड-8 से दसवां", "लॉर्ड-8 से ग्यारहवां", "लॉर्ड-8 से बारहवां",
+                "लॉर्ड-9 से पहला", "लॉर्ड-9 से दूसरा", "लॉर्ड-9 से तीसरा", "लॉर्ड-9 से चौथा", "लॉर्ड-9 से पांचवां", "लॉर्ड-9 से छठा", "लॉर्ड-9 से सातवां", "लॉर्ड-9 से आठवां", "लॉर्ड-9 से नौवां", "लॉर्ड-9 से दसवां", "लॉर्ड-9 से ग्यारहवां", "लॉर्ड-9 से बारहवां",
+                "लॉर्ड-10 से पहला", "लॉर्ड-10 से दूसरा", "लॉर्ड-10 से तीसरा", "लॉर्ड-10 से चौथा", "लॉर्ड-10 से पांचवां", "लॉर्ड-10 से छठा", "लॉर्ड-10 से सातवां", "लॉर्ड-10 से आठवां", "लॉर्ड-10 से नौवां", "लॉर्ड-10 से दसवां", "लॉर्ड-10 से ग्यारहवां", "लॉर्ड-10 से बारहवां",
+                "लॉर्ड-11 से पहला", "लॉर्ड-11 से दूसरा", "लॉर्ड-11 से तीसरा", "लॉर्ड-11 से चौथा", "लॉर्ड-11 से पांचवां", "लॉर्ड-11 से छठा", "लॉर्ड-11 से सातवां", "लॉर्ड-11 से आठवां", "लॉर्ड-11 से नौवां", "लॉर्ड-11 से दसवां", "लॉर्ड-11 से ग्यारहवां", "लॉर्ड-11 से बारहवां",
+                "लॉर्ड-12 से पहला", "लॉर्ड-12 से दूसरा", "लॉर्ड-12 से तीसरा", "लॉर्ड-12 से चौथा", "लॉर्ड-12 से पांचवां", "लॉर्ड-12 से छठा", "लॉर्ड-12 से सातवां", "लॉर्ड-12 से आठवां", "लॉर्ड-12 से नौवां", "लॉर्ड-12 से दसवां", "लॉर्ड-12 से ग्यारहवां", "लॉर्ड-12 से बारहवां"
+            ];
+            let html = "";
+            list.forEach(item => {
+                let sel = (item === selectedVal) ? "selected" : "";
+                html += `<option ${sel}>${item}</option>`;
+            });
+            return html;
+        }
+
+        function getRashiOptions(selectedVal) {
+            let html = `<option value="">--चुनें--</option>`;
+            rashisList.forEach(r => {
+                let sel = (r === selectedVal) ? "selected" : "";
+                html += `<option ${sel}>${r}</option>`;
+            });
+            return html;
+        }
+
+        function getAnshOptions(selectedVal) {
+            let html = "";
+            for(let i=0; i<=29; i++) {
+                let sel = (i == selectedVal) ? "selected" : "";
+                html += `<option ${sel}>${i}</option>`;
+            }
+            return html;
+        }
+
+        function getKalaVikOptions(selectedVal) {
+            let html = "";
+            for(let i=0; i<=59; i++) {
+                let sel = (i == selectedVal) ? "selected" : "";
+                html += `<option ${sel}>${i}</option>`;
+            }
+            return html;
+        }
+
+        function onPlanetChange(setNum, rowNum) {
+            let pVal = document.getElementById(`s${setNum}_p${rowNum}`).value;
+            if (presetData[pVal]) {
+                document.getElementById(`s${setNum}_r${rowNum}`).value = presetData[pVal].rashi;
+                document.getElementById(`s${setNum}_a${rowNum}`).value = presetData[pVal].ansh;
+                document.getElementById(`s${setNum}_k${rowNum}`).value = presetData[pVal].kala;
+                document.getElementById(`s${setNum}_v${rowNum}`).value = presetData[pVal].vik;
+            }
+            updateSheet();
+        }
+
+        function calculateCon(rashi, ansh) {
+            if (!rashi || ansh === "") return "";
+            let idx = rashisList.indexOf(rashi);
+            if (idx === -1) return "";
+            
+            let targetIdx = idx;
+            let a = parseInt(ansh);
+            if (a >= 0 && a <= 10) {
+                targetIdx = (idx - 1 + 12) % 12;
+            } else if (a >= 11 && a <= 24) {
+                targetIdx = idx;
+            } else if (a >= 25 && a <= 29) {
+                targetIdx = (idx + 1) % 12;
+            }
+            return rashisList[targetIdx];
+        }
+
+        function calculateD9(rashi, ansh, kala, vik) {
+            if (!rashi) return "";
+            let idx = rashisList.indexOf(rashi);
+            if (idx === -1) return "";
+            
+            let totalAnsh = (idx * 30) + (parseInt(ansh) || 0) + ((parseInt(kala) || 0) / 60) + ((parseInt(vik) || 0) / 3600);
+            let d9Total = totalAnsh * 9;
+            let d9RashiIdx = Math.floor(d9Total / 30) % 12;
+            return rashisList[d9RashiIdx];
+        }
+
+        function calculateSekta(d1, d2, d3) {
+            let getVal = (item) => {
+                let rVal = (rashiValues[item.rashi] !== undefined ? rashiValues[item.rashi] : 0);
+                let raw = (rVal * 30) + (parseInt(item.ansh) || 0) + ((parseInt(item.kala) || 0) / 60) + ((parseInt(item.vik) || 0) / 3600);
+                return Number(raw.toFixed(5));
+            };
+
+            let v4 = getVal(d1);
+            let v5 = getVal(d2);
+            let v6 = getVal(d3);
+
+            if ((v4 > v6 && v6 > v5) || (v5 === v6) || (v4 === v6) || (v5 > v4 && v4 > v6) || (v6 > v5 && v5 > v4)) {
+                if (v5 === v6 && v5 === 0) return "0";
+                if (v4 > v6 && v6 > v5) return "0";
+                if (v5 === v6) return "0";
+                if (v4 === v6) return "0";
+                if (v5 > v4 && v4 > v6) return "0";
+                if (v6 > v5 && v5 > v4) return "0";
+            }
+            
+            if (v5 === 0) return "0";
+            return "1";
+        }
+
+        function calculateSehamValues(d1, d2, d3, c7_val) {
+            let getRVal = (r) => (rashiValues[r] !== undefined ? rashiValues[r] : 0);
+
+            let f4 = parseInt(d1.vik) || 0, e4 = parseInt(d1.kala) || 0, d4 = parseInt(d1.ansh) || 0;
+            let f5 = parseInt(d2.vik) || 0, e5 = parseInt(d2.kala) || 0, d5 = parseInt(d2.ansh) || 0;
+            let f6 = parseInt(d3.vik) || 0, e6 = parseInt(d3.kala) || 0, d6 = parseInt(d3.ansh) || 0;
+            let c_val1 = getRVal(d1.rashi), c_val3 = getRVal(d3.rashi);
+
+            let vikla = ((f4 + f6 + 60) - f5) % 60;
+            let kala = (Math.floor(((f4 + f6 + 60) - f5) / 60) + e4 + e6 + 59 - e5) % 60;
+            let totalMinSteps = Math.floor(((f4 + f6 + 60) - f5) / 60) + e4 + e6 + 59 - e5;
+            let ansh = (Math.floor(totalMinSteps / 60) + d4 + d6 + 29 - d5) % 30;
+
+            let part1 = Math.floor((Math.floor(totalMinSteps / 60) + d4 + d6 + 29 - d5) / 30);
+            let part2 = (c_val1 + 11 + parseInt(c7_val || 0) + c_val3) - getRVal(d2.rashi);
+            let totalRashiIdx = (part1 + part2) % 12;
+            if (totalRashiIdx < 0) totalRashiIdx += 12;
+
+            return {
+                rashi: rashisList[totalRashiIdx],
+                ansh: ansh,
+                kala: kala,
+                vikla: vikla
+            };
+        }
+
+        let historyStack = [];
+        let redoStack = [];
+        let isPerformingHistoryAction = false;
+
+        function getFullState() {
+            let state = {};
+            for (let s = 1; s <= 10; s++) {
+                state[`s${s}_pravesh`] = document.getElementById(`s${s}_pravesh`).value;
+                for (let i = 1; i <= 3; i++) {
+                    state[`s${s}_p${i}`] = document.getElementById(`s${s}_p${i}`).value;
+                    state[`s${s}_r${i}`] = document.getElementById(`s${s}_r${i}`).value;
+                    state[`s${s}_a${i}`] = document.getElementById(`s${s}_a${i}`).value;
+                    state[`s${s}_k${i}`] = document.getElementById(`s${s}_k${i}`).value;
+                    state[`s${s}_v${i}`] = document.getElementById(`s${s}_v${i}`).value;
+                }
+                state[`s${s}_map1`] = document.getElementById(`s${s}_map1`).value;
+                state[`s${s}_map2`] = document.getElementById(`s${s}_map2`).value;
+                state[`s${s}_map3`] = document.getElementById(`s${s}_map3`).value;
+            }
+
+            // Also capture popup window state if open
+            let popupWinRef = window.popupWindowInstance;
+            if (popupWinRef && !popupWinRef.closed) {
+                try {
+                    for (let popS = 1; popS <= 5; popS++) {
+                        for (let i = 1; i <= 3; i++) {
+                            state[`p_${popS}_1_${i}`] = popupWinRef.document.getElementById(`p_${popS}_1_${i}`).value;
+                            state[`p_${popS}_1_r${i}`] = popupWinRef.document.getElementById(`p_${popS}_1_r${i}`).value;
+                            state[`p_${popS}_1_a${i}`] = popupWinRef.document.getElementById(`p_${popS}_1_a${i}`).value;
+                            state[`p_${popS}_1_k${i}`] = popupWinRef.document.getElementById(`p_${popS}_1_k${i}`).value;
+                            state[`p_${popS}_1_v${i}`] = popupWinRef.document.getElementById(`p_${popS}_1_v${i}`).value;
+                        }
+                        state[`p_${popS}_2_map1`] = popupWinRef.document.getElementById(`p_${popS}_2_map1`).value;
+                        state[`p_${popS}_2_map2`] = popupWinRef.document.getElementById(`p_${popS}_2_map2`).value;
+                        state[`p_${popS}_2_map3`] = popupWinRef.document.getElementById(`p_${popS}_2_map3`).value;
+
+                        state[`p_${popS}_3_p3`] = popupWinRef.document.getElementById(`p_${popS}_3_p3`).value;
+                        state[`p_${popS}_3_r3`] = popupWinRef.document.getElementById(`p_${popS}_3_r3`).value;
+                        state[`p_${popS}_3_a3`] = popupWinRef.document.getElementById(`p_${popS}_3_a3`).value;
+                        state[`p_${popS}_3_k3`] = popupWinRef.document.getElementById(`p_${popS}_3_k3`).value;
+                        state[`p_${popS}_3_v3`] = popupWinRef.document.getElementById(`p_${popS}_3_v3`).value;
+
+                        state[`p_${popS}_4_p3`] = popupWinRef.document.getElementById(`p_${popS}_4_p3`).value;
+                        state[`p_${popS}_4_r3`] = popupWinRef.document.getElementById(`p_${popS}_4_r3`).value;
+                        state[`p_${popS}_4_a3`] = popupWinRef.document.getElementById(`p_${popS}_4_a3`).value;
+                        state[`p_${popS}_4_k3`] = popupWinRef.document.getElementById(`p_${popS}_4_k3`).value;
+                        state[`p_${popS}_4_v3`] = popupWinRef.document.getElementById(`p_${popS}_4_v3`).value;
+                    }
+                } catch(e) {}
+            }
+            return state;
+        }
+
+        function saveState() {
+            if (isPerformingHistoryAction) return;
+            historyStack.push(getFullState());
+            redoStack = [];
+        }
+
+        function triggerUndo() {
+            if (historyStack.length === 0) return;
+            redoStack.push(getFullState());
+            let prevState = historyStack.pop();
+            applyState(prevState);
+        }
+
+        function triggerRedo() {
+            if (redoStack.length === 0) return;
+            historyStack.push(getFullState());
+            let nextState = redoStack.pop();
+            applyState(nextState);
+        }
+
+        function applyState(state) {
+            isPerformingHistoryAction = true;
+            for (let key in state) {
+                let el = document.getElementById(key);
+                if (el) el.value = state[key];
+                
+                let popupWinRef = window.popupWindowInstance;
+                if (popupWinRef && !popupWinRef.closed) {
+                    try {
+                        let pEl = popupWinRef.document.getElementById(key);
+                        if (pEl) pEl.value = state[key];
+                    } catch(e) {}
+                }
+            }
+            isPerformingHistoryAction = false;
+            updateSheet(false);
+        }
+
+        function saveLastDataManually() {
+            let currentState = getFullState();
+            localStorage.setItem("astrology_app_last_data", JSON.stringify(currentState));
+            alert("डेटा सफलतापूर्वक सहेज (Save) कर लिया गया है!");
+        }
+
+        function loadLastDataOnStart() {
+            let saved = localStorage.getItem("astrology_app_last_data");
+            if (saved) {
+                try {
+                    let parsedState = JSON.parse(saved);
+                    applyState(parsedState);
+                } catch(e) {}
+            }
+        }
+
+        function updateSheet(saveToHistory = true) {
+            if (saveToHistory) {
+                saveState();
+            }
+
+            for (let s = 1; s <= 10; s++) {
+                let data = {};
+                for (let i = 1; i <= 3; i++) {
+                    data[i] = {
+                        planet: document.getElementById(`s${s}_p${i}`).value,
+                        rashi: document.getElementById(`s${s}_r${i}`).value,
+                        ansh: document.getElementById(`s${s}_a${i}`).value,
+                        kala: document.getElementById(`s${s}_k${i}`).value,
+                        vik: document.getElementById(`s${s}_v${i}`).value
+                    };
+                    
+                    document.getElementById(`s${s}_con${i}`).innerText = calculateCon(data[i].rashi, data[i].ansh);
+                    document.getElementById(`s${s}_d9${i}`).innerText = calculateD9(data[i].rashi, data[i].ansh, data[i].kala, data[i].vik);
+                }
+
+                // Box 1 Calculations
+                document.getElementById(`s${s}_sekta_val`).innerText = calculateSekta(data[1], data[2], data[3]);
+                let sekta_num_a = parseInt(document.getElementById(`s${s}_sekta_val`).innerText) || 0;
+
+                let seham_a = calculateSehamValues(data[1], data[2], data[3], sekta_num_a);
+                document.getElementById(`s${s}_seh_r`).innerText = seham_a.rashi;
+                document.getElementById(`s${s}_seh_a`).innerText = seham_a.ansh;
+                document.getElementById(`s${s}_seh_k`).innerText = seham_a.kala;
+                document.getElementById(`s${s}_seh_v`).innerText = seham_a.vikla;
+                document.getElementById(`s${s}_seh_con`).innerText = calculateCon(seham_a.rashi, seham_a.ansh);
+                document.getElementById(`s${s}_seh_d9`).innerText = calculateD9(seham_a.rashi, seham_a.ansh, seham_a.kala, seham_a.vikla);
+
+                let planetsOrder = [];
+                for (let j = 1; j <= 3; j++) {
+                    let mapIndex = document.getElementById(`s${s}_map${j}`).value;
+                    let source = data[mapIndex];
+                    
+                    document.getElementById(`s${s}_bp${j}`).innerText = source.planet;
+                    document.getElementById(`s${s}_br${j}`).innerText = source.rashi;
+                    document.getElementById(`s${s}_ba${j}`).innerText = source.ansh;
+                    document.getElementById(`s${s}_bk${j}`).innerText = source.kala;
+                    document.getElementById(`s${s}_bv${j}`).innerText = source.vik;
+                    
+                    document.getElementById(`s${s}_bcon${j}`).innerText = calculateCon(source.rashi, source.ansh);
+                    document.getElementById(`s${s}_bd9${j}`).innerText = calculateD9(source.rashi, source.ansh, source.kala, source.vik);
+
+                    planetsOrder.push(source.planet);
+                }
+
+                // Box 2 Calculations
+                let b_d1 = { rashi: document.getElementById(`s${s}_br1`).innerText, ansh: document.getElementById(`s${s}_ba1`).innerText, kala: document.getElementById(`s${s}_bk1`).innerText, vik: document.getElementById(`s${s}_bv1`).innerText };
+                let b_d2 = { rashi: document.getElementById(`s${s}_br2`).innerText, ansh: document.getElementById(`s${s}_ba2`).innerText, kala: document.getElementById(`s${s}_bk2`).innerText, vik: document.getElementById(`s${s}_bv2`).innerText };
+                let b_d3 = { rashi: document.getElementById(`s${s}_br3`).innerText, ansh: document.getElementById(`s${s}_ba3`).innerText, kala: document.getElementById(`s${s}_bk3`).innerText, vik: document.getElementById(`s${s}_bv3`).innerText };
+                
+                let sektaVal_b = calculateSekta(b_d1, b_d2, b_d3);
+                document.getElementById(`s${s}_bsekta_val`).innerText = sektaVal_b;
+                let sekta_num_b = parseInt(sektaVal_b) || 0;
+
+                let seham_b = calculateSehamValues(b_d1, b_d2, b_d3, sekta_num_b);
+                document.getElementById(`s${s}_bseh_r`).innerText = seham_b.rashi;
+                document.getElementById(`s${s}_bseh_a`).innerText = seham_b.ansh;
+                document.getElementById(`s${s}_bseh_k`).innerText = seham_b.kala;
+                document.getElementById(`s${s}_bseh_v`).innerText = seham_b.vikla;
+                document.getElementById(`s${s}_bseh_con`).innerText = calculateCon(seham_b.rashi, seham_b.ansh);
+                document.getElementById(`s${s}_bseh_d9`).innerText = calculateD9(seham_b.rashi, seham_b.ansh, seham_b.kala, seham_b.vikla);
+
+                // --- POPUP WINDOW 5 SETS LIVE SYNC ---
+                let popupWinRef = window.popupWindowInstance;
+                if (popupWinRef && !popupWinRef.closed) {
+                    try {
+                        for (let popS = 1; popS <= 5; popS++) {
+                            let mData = {};
+                            for (let i = 1; i <= 3; i++) {
+                                mData[i] = {
+                                    planet: popupWinRef.document.getElementById(`p_${popS}_1_${i}`).value,
+                                    rashi: popupWinRef.document.getElementById(`p_${popS}_1_r${i}`).value,
+                                    ansh: popupWinRef.document.getElementById(`p_${popS}_1_a${i}`).value,
+                                    kala: popupWinRef.document.getElementById(`p_${popS}_1_k${i}`).value,
+                                    vik: popupWinRef.document.getElementById(`p_${popS}_1_v${i}`).value
+                                };
+                                popupWinRef.document.getElementById(`p_${popS}_1_con${i}`).innerText = calculateCon(mData[i].rashi, mData[i].ansh);
+                                popupWinRef.document.getElementById(`p_${popS}_1_d9${i}`).innerText = calculateD9(mData[i].rashi, mData[i].ansh, mData[i].kala, mData[i].vik);
+                            }
+
+                            // Box 1 Seham
+                            let s1_sekta = calculateSekta(mData[1], mData[2], mData[3]);
+                            popupWinRef.document.getElementById(`p_${popS}_1_sekta`).innerText = s1_sekta;
+                            let s1_seh = calculateSehamValues(mData[1], mData[2], mData[3], parseInt(s1_sekta) || 0);
+                            popupWinRef.document.getElementById(`p_${popS}_1_seh_r`).innerText = s1_seh.rashi;
+                            popupWinRef.document.getElementById(`p_${popS}_1_seh_a`).innerText = s1_seh.ansh;
+                            popupWinRef.document.getElementById(`p_${popS}_1_seh_k`).innerText = s1_seh.kala;
+                            popupWinRef.document.getElementById(`p_${popS}_1_seh_v`).innerText = s1_seh.vikla;
+                            popupWinRef.document.getElementById(`p_${popS}_1_seh_con`).innerText = calculateCon(s1_seh.rashi, s1_seh.ansh);
+                            popupWinRef.document.getElementById(`p_${popS}_1_seh_d9`).innerText = calculateD9(s1_seh.rashi, s1_seh.ansh, s1_seh.kala, s1_seh.vikla);
+
+                            let ord1 = [mData[1].planet, mData[2].planet, mData[3].planet];
+                            let name1 = ord1.join(", ") + " से सहम";
+                            let lc1 = name1.lastIndexOf(",");
+                            if (lc1 !== -1) name1 = name1.substring(0, lc1) + " और" + name1.substring(lc1 + 1);
+                            popupWinRef.document.getElementById(`p_${popS}_1_name`).innerText = name1;
+
+                            // Box 2 (Swap)
+                            let ord2 = [];
+                            let b2_map = {};
+                            for (let j = 1; j <= 3; j++) {
+                                let mIdx = popupWinRef.document.getElementById(`p_${popS}_2_map${j}`).value;
+                                let src = mData[mIdx];
+                                popupWinRef.document.getElementById(`p_${popS}_2_bp${j}`).innerText = src.planet;
+                                popupWinRef.document.getElementById(`p_${popS}_2_br${j}`).innerText = src.rashi;
+                                popupWinRef.document.getElementById(`p_${popS}_2_ba${j}`).innerText = src.ansh;
+                                popupWinRef.document.getElementById(`p_${popS}_2_bk${j}`).innerText = src.kala;
+                                popupWinRef.document.getElementById(`p_${popS}_2_bv${j}`).innerText = src.vik;
+                                popupWinRef.document.getElementById(`p_${popS}_2_bcon${j}`).innerText = calculateCon(src.rashi, src.ansh);
+                                popupWinRef.document.getElementById(`p_${popS}_2_bd9${j}`).innerText = calculateD9(src.rashi, src.ansh, src.kala, src.vik);
+                                ord2.push(src.planet);
+                                b2_map[j] = src;
+                            }
+
+                            let b2_d1 = b2_map[1], b2_d2 = b2_map[2], b2_d3 = b2_map[3];
+                            let s2_sekta = calculateSekta(b2_d1, b2_d2, b2_d3);
+                            popupWinRef.document.getElementById(`p_${popS}_2_sekta`).innerText = s2_sekta;
+                            let s2_seh = calculateSehamValues(b2_d1, b2_d2, b2_d3, parseInt(s2_sekta) || 0);
+                            popupWinRef.document.getElementById(`p_${popS}_2_seh_r`).innerText = s2_seh.rashi;
+                            popupWinRef.document.getElementById(`p_${popS}_2_seh_a`).innerText = s2_seh.ansh;
+                            popupWinRef.document.getElementById(`p_${popS}_2_seh_k`).innerText = s2_seh.kala;
+                            popupWinRef.document.getElementById(`p_${popS}_2_seh_v`).innerText = s2_seh.vikla;
+                            popupWinRef.document.getElementById(`p_${popS}_2_seh_con`).innerText = calculateCon(s2_seh.rashi, s2_seh.ansh);
+                            popupWinRef.document.getElementById(`p_${popS}_2_seh_d9`).innerText = calculateD9(s2_seh.rashi, s2_seh.ansh, s2_seh.kala, s2_seh.vikla);
+
+                            let name2 = ord2.join(", ") + " से सहम";
+                            let lc2 = name2.lastIndexOf(",");
+                            if (lc2 !== -1) name2 = name2.substring(0, lc2) + " और" + name2.substring(lc2 + 1);
+                            popupWinRef.document.getElementById(`p_${popS}_2_name`).innerText = name2;
+
+                            // Box 3
+                            popupWinRef.document.getElementById(`p_${popS}_3_p1`).innerText = name1;
+                            popupWinRef.document.getElementById(`p_${popS}_3_r1`).innerText = s1_seh.rashi;
+                            popupWinRef.document.getElementById(`p_${popS}_3_a1`).innerText = s1_seh.ansh;
+                            popupWinRef.document.getElementById(`p_${popS}_3_k1`).innerText = s1_seh.kala;
+                            popupWinRef.document.getElementById(`p_${popS}_3_v1`).innerText = s1_seh.vikla;
+                            popupWinRef.document.getElementById(`p_${popS}_3_con1`).innerText = calculateCon(s1_seh.rashi, s1_seh.ansh);
+                            popupWinRef.document.getElementById(`p_${popS}_3_d91`).innerText = calculateD9(s1_seh.rashi, s1_seh.ansh, s1_seh.kala, s1_seh.vikla);
+
+                            popupWinRef.document.getElementById(`p_${popS}_3_p2`).innerText = name2;
+                            popupWinRef.document.getElementById(`p_${popS}_3_r2`).innerText = s2_seh.rashi;
+                            popupWinRef.document.getElementById(`p_${popS}_3_a2`).innerText = s2_seh.ansh;
+                            popupWinRef.document.getElementById(`p_${popS}_3_k2`).innerText = s2_seh.kala;
+                            popupWinRef.document.getElementById(`p_${popS}_3_v2`).innerText = s2_seh.vikla;
+                            popupWinRef.document.getElementById(`p_${popS}_3_con2`).innerText = calculateCon(s2_seh.rashi, s2_seh.ansh);
+                            popupWinRef.document.getElementById(`p_${popS}_3_d92`).innerText = calculateD9(s2_seh.rashi, s2_seh.ansh, s2_seh.kala, s2_seh.vikla);
+
+                            let b3_p3 = popupWinRef.document.getElementById(`p_${popS}_3_p3`).value;
+                            let b3_r3 = popupWinRef.document.getElementById(`p_${popS}_3_r3`).value;
+                            let b3_a3 = popupWinRef.document.getElementById(`p_${popS}_3_a3`).value;
+                            let b3_k3 = popupWinRef.document.getElementById(`p_${popS}_3_k3`).value;
+                            let b3_v3 = popupWinRef.document.getElementById(`p_${popS}_3_v3`).value;
+
+                            popupWinRef.document.getElementById(`p_${popS}_3_con3`).innerText = calculateCon(b3_r3, b3_a3);
+                            popupWinRef.document.getElementById(`p_${popS}_3_d93`).innerText = calculateD9(b3_r3, b3_a3, b3_k3, b3_v3);
+
+                            let b3_d1 = { rashi: s1_seh.rashi, ansh: s1_seh.ansh, kala: s1_seh.kala, vik: s1_seh.vikla };
+                            let b3_d2 = { rashi: s2_seh.rashi, ansh: s2_seh.ansh, kala: s2_seh.kala, vik: s2_seh.vikla };
+                            let b3_d3 = { rashi: b3_r3, ansh: b3_a3, kala: b3_k3, vik: b3_v3 };
+
+                            let s3_sekta = calculateSekta(b3_d1, b3_d2, b3_d3);
+                            popupWinRef.document.getElementById(`p_${popS}_3_sekta`).innerText = s3_sekta;
+                            let s3_seh = calculateSehamValues(b3_d1, b3_d2, b3_d3, parseInt(s3_sekta) || 0);
+                            popupWinRef.document.getElementById(`p_${popS}_3_seh_r`).innerText = s3_seh.rashi;
+                            popupWinRef.document.getElementById(`p_${popS}_3_seh_a`).innerText = s3_seh.ansh;
+                            popupWinRef.document.getElementById(`p_${popS}_3_seh_k`).innerText = s3_seh.kala;
+                            popupWinRef.document.getElementById(`p_${popS}_3_seh_v`).innerText = s3_seh.vikla;
+                            popupWinRef.document.getElementById(`p_${popS}_3_seh_con`).innerText = calculateCon(s3_seh.rashi, s3_seh.ansh);
+                            popupWinRef.document.getElementById(`p_${popS}_3_seh_d9`).innerText = calculateD9(s3_seh.rashi, s3_seh.ansh, s3_seh.kala, s3_seh.vikla);
+
+                            let name3 = name1 + ", " + name2 + ", " + b3_p3 + " से सहम";
+                            popupWinRef.document.getElementById(`p_${popS}_3_name`).innerText = name3;
+
+                            // Box 4
+                            popupWinRef.document.getElementById(`p_${popS}_4_p1`).innerText = name2;
+                            popupWinRef.document.getElementById(`p_${popS}_4_r1`).innerText = s2_seh.rashi;
+                            popupWinRef.document.getElementById(`p_${popS}_4_a1`).innerText = s2_seh.ansh;
+                            popupWinRef.document.getElementById(`p_${popS}_4_k1`).innerText = s2_seh.kala;
+                            popupWinRef.document.getElementById(`p_${popS}_4_v1`).innerText = s2_seh.vikla;
+                            popupWinRef.document.getElementById(`p_${popS}_4_con1`).innerText = calculateCon(s2_seh.rashi, s2_seh.ansh);
+                            popupWinRef.document.getElementById(`p_${popS}_4_d91`).innerText = calculateD9(s2_seh.rashi, s2_seh.ansh, s2_seh.kala, s2_seh.vikla);
+
+                            popupWinRef.document.getElementById(`p_${popS}_4_p2`).innerText = name1;
+                            popupWinRef.document.getElementById(`p_${popS}_4_r2`).innerText = s1_seh.rashi;
+                            popupWinRef.document.getElementById(`p_${popS}_4_a2`).innerText = s1_seh.ansh;
+                            popupWinRef.document.getElementById(`p_${popS}_4_k2`).innerText = s1_seh.kala;
+                            popupWinRef.document.getElementById(`p_${popS}_4_v2`).innerText = s1_seh.vikla;
+                            popupWinRef.document.getElementById(`p_${popS}_4_con2`).innerText = calculateCon(s1_seh.rashi, s1_seh.ansh);
+                            popupWinRef.document.getElementById(`p_${popS}_4_d92`).innerText = calculateD9(s1_seh.rashi, s1_seh.ansh, s1_seh.kala, s1_seh.vikla);
+
+                            let b4_p3 = popupWinRef.document.getElementById(`p_${popS}_4_p3`).value;
+                            let b4_r3 = popupWinRef.document.getElementById(`p_${popS}_4_r3`).value;
+                            let b4_a3 = popupWinRef.document.getElementById(`p_${popS}_4_a3`).value;
+                            let b4_k3 = popupWinRef.document.getElementById(`p_${popS}_4_k3`).value;
+                            let b4_v3 = popupWinRef.document.getElementById(`p_${popS}_4_v3`).value;
+
+                            popupWinRef.document.getElementById(`p_${popS}_4_con3`).innerText = calculateCon(b4_r3, b4_a3);
+                            popupWinRef.document.getElementById(`p_${popS}_4_d93`).innerText = calculateD9(b4_r3, b4_a3, b4_k3, b4_v3);
+
+                            let b4_d1 = { rashi: s2_seh.rashi, ansh: s2_seh.ansh, kala: s2_seh.kala, vik: s2_seh.vikla };
+                            let b4_d2 = { rashi: s1_seh.rashi, ansh: s1_seh.ansh, kala: s1_seh.kala, vik: s1_seh.vikla };
+                            let b4_d3 = { rashi: b4_r3, ansh: b4_a3, kala: b4_k3, vik: b4_v3 };
+
+                            let s4_sekta = calculateSekta(b4_d1, b4_d2, b4_d3);
+                            popupWinRef.document.getElementById(`p_${popS}_4_sekta`).innerText = s4_sekta;
+                            let s4_seh = calculateSehamValues(b4_d1, b4_d2, b4_d3, parseInt(s4_sekta) || 0);
+                            popupWinRef.document.getElementById(`p_${popS}_4_seh_r`).innerText = s4_seh.rashi;
+                            popupWinRef.document.getElementById(`p_${popS}_4_seh_a`).innerText = s4_seh.ansh;
+                            popupWinRef.document.getElementById(`p_${popS}_4_seh_k`).innerText = s4_seh.kala;
+                            popupWinRef.document.getElementById(`p_${popS}_4_seh_v`).innerText = s4_seh.vikla;
+                            popupWinRef.document.getElementById(`p_${popS}_4_seh_con`).innerText = calculateCon(s4_seh.rashi, s4_seh.ansh);
+                            popupWinRef.document.getElementById(`p_${popS}_4_seh_d9`).innerText = calculateD9(s4_seh.rashi, s4_seh.ansh, s4_seh.kala, s4_seh.vikla);
+
+                            let name4 = name2 + ", " + name1 + ", " + b4_p3 + " से सहम";
+                            popupWinRef.document.getElementById(`p_${popS}_4_name`).innerText = name4;
+                        }
+                    } catch (e) { }
+                }
+
+                let sehamText = planetsOrder.join(", ") + " से सहम";
+                let lastCommaIdx = sehamText.lastIndexOf(",");
+                if (lastCommaIdx !== -1) {
+                    sehamText = sehamText.substring(0, lastCommaIdx) + " और" + sehamText.substring(lastCommaIdx + 1);
+                }
+                
+                document.getElementById(`s${s}_seham_name_a`).innerText = sehamText;
+                document.getElementById(`s${s}_seham_name_b`).innerText = sehamText;
+            }
+        }
+
+        // 5 सेट वाली पॉपअप विंडो बनाने का फंक्शन
+        function openPopupSet5() {
+            let pOpts = getFullDropdownOptions("सूर्य");
+            let rOpts = getRashiOptions("मेष");
+            let aOpts = getAnshOptions(10);
+            let kvOpts = getKalaVikOptions(0);
+
+            let popupHtml = `
+                <!DOCTYPE html>
+                <html lang="hi">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>5 सेट - 4 बॉक्स पॉपअप विंडो</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; font-size: 10pt; font-weight: bold; text-align: center; background-color: #f4f4f4; margin: 0; padding: 10px; }
+                        .container { background-color: #ffffff; padding: 10px; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); width: 100%; max-width: 780px; margin: 0 auto; box-sizing: border-box; }
+                        .popup-action-bar { margin-bottom: 15px; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
+                        .popup-action-bar button { font-family: Arial; font-size: 10pt; font-weight: bold; padding: 6px 10px; cursor: pointer; background-color: #e0e0e0; border: 1px solid #777; border-radius: 4px; }
+                        .popup-action-bar button:hover { background-color: #d0d0d0; }
+                        .close-popup-btn { background-color: #f44336 !important; color: white !important; }
+                        .close-popup-btn:hover { background-color: #d32f2f !important; }
+                        table { width: 100%; border-collapse: collapse; margin-bottom: 15px; text-align: center; }
+                        th, td { border: 2px solid #000; padding: 4px 2px; font-family: Arial; font-size: 9pt; font-weight: bold; text-align: center; vertical-align: middle; word-break: break-word; }
+                        th { background-color: #ffeb3b; color: #000; }
+                        .yellow-bg { background-color: #ffeb3b; }
+                        .red-text { color: red; font-weight: bold; }
+                        .set-title { text-align: left; font-size: 12pt; color: #333; margin-top: 20px; margin-bottom: 10px; border-bottom: 2px solid #333; padding-bottom: 5px;}
+                        .box-title { background-color: #e0e0e0; padding: 4px; margin-top: 10px; margin-bottom: 5px; font-weight: bold; text-align: left; border-left: 4px solid #4CAF50; padding-left: 8px; }
+                        select, input { font-family: Arial; font-size: 9pt; font-weight: bold; width: 100%; padding: 2px; text-align: center; box-sizing: border-box; }
+                        .fixed-val { font-weight: bold; text-align: center; }
+                        .formula-result { font-family: Arial; font-size: 9pt; font-weight: bold; color: #000; background-color: #fff; text-align: center; }
+                        .auto-cell { font-family: Arial; font-size: 9pt; font-weight: bold; color: #000; background-color: #f9f9f9; text-align: center; }
+                        .seham-row { background-color: #55ff55 !important; text-align: center !important; }
+                        .seham-name-cell { color: red !important; font-weight: bold !important; text-align: center !important; background-color: #55ff55 !important; }
+                        .seham-val-cell { font-family: Arial; font-size: 9pt; font-weight: bold; color: #000; background-color: #55ff55 !important; text-align: center; }
+                        @media print {
+                            .popup-action-bar { display: none !important; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="popup-action-bar">
+                            <button onclick="navigator.clipboard.writeText(document.body.innerText).then(() => alert('टेक्स्ट कॉपी हो गया!'))">Copy</button>
+                            <button onclick="window.print()">Print</button>
+                            <button onclick="window.print()">Mobile Print</button>
+                            <button onclick="window.opener.triggerUndo()">Undo</button>
+                            <button onclick="window.opener.triggerRedo()">Redo</button>
+                            <button onclick="window.opener.saveLastDataManually()" style="background-color: #2196F3; color: white;">Last Data Save</button>
+                            <button onclick="window.close()" class="close-popup-btn">❌ बंद करें (X)</button>
+                        </div>
+                        <h3>5 Sets (प्रत्येक में 4 Boxes)</h3>
+            `;
+
+            for (let popS = 1; popS <= 5; popS++) {
+                popupHtml += `
+                    <div class="box-wrapper">
+                        <div class="set-title">Set ${popS}</div>
+
+                        <!-- Box 1 -->
+                        <div class="box-title">Box 1</div>
+                        <table>
+                            <thead>
+                                <tr><th></th><th>ग्रह</th><th>राशि</th><th>अंश</th><th>कला</th><th>विक</th><th>Con</th><th>D9</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><select id="p_${popS}_1_1" onchange="window.opener.updateSheet()">${pOpts}</select></td>
+                                    <td><select id="p_${popS}_1_r1" onchange="window.opener.updateSheet()">${rOpts}</select></td>
+                                    <td><select id="p_${popS}_1_a1" onchange="window.opener.updateSheet()">${aOpts}</select></td>
+                                    <td><select id="p_${popS}_1_k1" onchange="window.opener.updateSheet()">${kvOpts}</select></td>
+                                    <td><select id="p_${popS}_1_v1" onchange="window.opener.updateSheet()">${kvOpts}</select></td>
+                                    <td id="p_${popS}_1_con1" class="formula-result"></td>
+                                    <td id="p_${popS}_1_d91" class="formula-result"></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><select id="p_${popS}_1_2" onchange="window.opener.updateSheet()">${pOpts}</select></td>
+                                    <td><select id="p_${popS}_1_r2" onchange="window.opener.updateSheet()">${rOpts}</select></td>
+                                    <td><select id="p_${popS}_1_a2" onchange="window.opener.updateSheet()">${aOpts}</select></td>
+                                    <td><select id="p_${popS}_1_k2" onchange="window.opener.updateSheet()">${kvOpts}</select></td>
+                                    <td><select id="p_${popS}_1_v2" onchange="window.opener.updateSheet()">${kvOpts}</select></td>
+                                    <td id="p_${popS}_1_con2" class="formula-result"></td>
+                                    <td id="p_${popS}_1_d92" class="formula-result"></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><select id="p_${popS}_1_3" onchange="window.opener.updateSheet()">${pOpts}</select></td>
+                                    <td><select id="p_${popS}_1_r3" onchange="window.opener.updateSheet()">${rOpts}</select></td>
+                                    <td><select id="p_${popS}_1_a3" onchange="window.opener.updateSheet()">${aOpts}</select></td>
+                                    <td><select id="p_${popS}_1_k3" onchange="window.opener.updateSheet()">${kvOpts}</select></td>
+                                    <td><select id="p_${popS}_1_v3" onchange="window.opener.updateSheet()">${kvOpts}</select></td>
+                                    <td id="p_${popS}_1_con3" class="formula-result"></td>
+                                    <td id="p_${popS}_1_d93" class="formula-result"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">सैकता</td>
+                                    <td id="p_${popS}_1_sekta" class="formula-result">0</td>
+                                    <td class="fixed-val">0</td><td class="fixed-val">0</td><td class="fixed-val">0</td><td></td><td></td>
+                                </tr>
+                                <tr class="seham-row">
+                                    <td colspan="2" id="p_${popS}_1_name" class="seham-name-cell">सहम</td>
+                                    <td id="p_${popS}_1_seh_r" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_1_seh_a" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_1_seh_k" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_1_seh_v" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_1_seh_con" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_1_seh_d9" class="seham-val-cell"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Box 2 -->
+                        <div class="box-title">Box 2</div>
+                        <table>
+                            <thead>
+                                <tr><th>स्वैप</th><th>ग्रह</th><th>राशि</th><th>अंश</th><th>कला</th><th>विक</th><th>Con</th><th>D9</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="yellow-bg"><select id="p_${popS}_2_map1" onchange="window.opener.updateSheet()" class="yellow-bg red-text"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option></select></td>
+                                    <td id="p_${popS}_2_bp1" class="auto-cell"></td><td id="p_${popS}_2_br1" class="auto-cell"></td><td id="p_${popS}_2_ba1" class="auto-cell"></td><td id="p_${popS}_2_bk1" class="auto-cell"></td><td id="p_${popS}_2_bv1" class="auto-cell"></td><td id="p_${popS}_2_bcon1" class="formula-result"></td><td id="p_${popS}_2_bd91" class="formula-result"></td>
+                                </tr>
+                                <tr>
+                                    <td class="yellow-bg"><select id="p_${popS}_2_map2" onchange="window.opener.updateSheet()" class="yellow-bg red-text"><option value="1" selected>1</option><option value="2">2</option><option value="3">3</option></select></td>
+                                    <td id="p_${popS}_2_bp2" class="auto-cell"></td><td id="p_${popS}_2_br2" class="auto-cell"></td><td id="p_${popS}_2_ba2" class="auto-cell"></td><td id="p_${popS}_2_bk2" class="auto-cell"></td><td id="p_${popS}_2_bv2" class="auto-cell"></td><td id="p_${popS}_2_bcon2" class="formula-result"></td><td id="p_${popS}_2_bd92" class="formula-result"></td>
+                                </tr>
+                                <tr>
+                                    <td class="yellow-bg"><select id="p_${popS}_2_map3" onchange="window.opener.updateSheet()" class="yellow-bg red-text"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option></select></td>
+                                    <td id="p_${popS}_2_bp3" class="auto-cell"></td><td id="p_${popS}_2_br3" class="auto-cell"></td><td id="p_${popS}_2_ba3" class="auto-cell"></td><td id="p_${popS}_2_bk3" class="auto-cell"></td><td id="p_${popS}_2_bv3" class="auto-cell"></td><td id="p_${popS}_2_bcon3" class="formula-result"></td><td id="p_${popS}_2_bd93" class="formula-result"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">सैकता</td>
+                                    <td id="p_${popS}_2_sekta" class="formula-result">0</td>
+                                    <td class="fixed-val">0</td><td class="fixed-val">0</td><td class="fixed-val">0</td><td></td><td></td>
+                                </tr>
+                                <tr class="seham-row">
+                                    <td colspan="2" id="p_${popS}_2_name" class="seham-name-cell">सहम</td>
+                                    <td id="p_${popS}_2_seh_r" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_2_seh_a" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_2_seh_k" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_2_seh_v" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_2_seh_con" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_2_seh_d9" class="seham-val-cell"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Box 3 -->
+                        <div class="box-title">Box 3</div>
+                        <table>
+                            <thead>
+                                <tr><th></th><th>ग्रह</th><th>राशि</th><th>अंश</th><th>कला</th><th>विक</th><th>Con</th><th>D9</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td id="p_${popS}_3_p1" class="auto-cell"></td><td id="p_${popS}_3_r1" class="auto-cell"></td><td id="p_${popS}_3_a1" class="auto-cell"></td><td id="p_${popS}_3_k1" class="auto-cell"></td><td id="p_${popS}_3_v1" class="auto-cell"></td><td id="p_${popS}_3_con1" class="formula-result"></td><td id="p_${popS}_3_d91" class="formula-result"></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td id="p_${popS}_3_p2" class="auto-cell"></td><td id="p_${popS}_3_r2" class="auto-cell"></td><td id="p_${popS}_3_a2" class="auto-cell"></td><td id="p_${popS}_3_k2" class="auto-cell"></td><td id="p_${popS}_3_v2" class="auto-cell"></td><td id="p_${popS}_3_con2" class="formula-result"></td><td id="p_${popS}_3_d92" class="formula-result"></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><select id="p_${popS}_3_p3" onchange="window.opener.updateSheet()">${pOpts}</select></td>
+                                    <td><select id="p_${popS}_3_r3" onchange="window.opener.updateSheet()">${rOpts}</select></td>
+                                    <td><select id="p_${popS}_3_a3" onchange="window.opener.updateSheet()">${aOpts}</select></td>
+                                    <td><select id="p_${popS}_3_k3" onchange="window.opener.updateSheet()">${kvOpts}</select></td>
+                                    <td><select id="p_${popS}_3_v3" onchange="window.opener.updateSheet()">${kvOpts}</select></td>
+                                    <td id="p_${popS}_3_con3" class="formula-result"></td>
+                                    <td id="p_${popS}_3_d93" class="formula-result"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">सैकता</td>
+                                    <td id="p_${popS}_3_sekta" class="formula-result">0</td>
+                                    <td class="fixed-val">0</td><td class="fixed-val">0</td><td class="fixed-val">0</td><td></td><td></td>
+                                </tr>
+                                <tr class="seham-row">
+                                    <td colspan="2" id="p_${popS}_3_name" class="seham-name-cell">सहम</td>
+                                    <td id="p_${popS}_3_seh_r" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_3_seh_a" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_3_seh_k" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_3_seh_v" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_3_seh_con" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_3_seh_d9" class="seham-val-cell"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Box 4 -->
+                        <div class="box-title">Box 4</div>
+                        <table>
+                            <thead>
+                                <tr><th></th><th>ग्रह</th><th>राशि</th><th>अंश</th><th>कला</th><th>विक</th><th>Con</th><th>D9</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td id="p_${popS}_4_p1" class="auto-cell"></td><td id="p_${popS}_4_r1" class="auto-cell"></td><td id="p_${popS}_4_a1" class="auto-cell"></td><td id="p_${popS}_4_k1" class="auto-cell"></td><td id="p_${popS}_4_v1" class="auto-cell"></td><td id="p_${popS}_4_con1" class="formula-result"></td><td id="p_${popS}_4_d91" class="formula-result"></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td id="p_${popS}_4_p2" class="auto-cell"></td><td id="p_${popS}_4_r2" class="auto-cell"></td><td id="p_${popS}_4_a2" class="auto-cell"></td><td id="p_${popS}_4_k2" class="auto-cell"></td><td id="p_${popS}_4_v2" class="auto-cell"></td><td id="p_${popS}_4_con2" class="formula-result"></td><td id="p_${popS}_4_d92" class="formula-result"></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><select id="p_${popS}_4_p3" onchange="window.opener.updateSheet()">${pOpts}</select></td>
+                                    <td><select id="p_${popS}_4_r3" onchange="window.opener.updateSheet()">${rOpts}</select></td>
+                                    <td><select id="p_${popS}_4_a3" onchange="window.opener.updateSheet()">${aOpts}</select></td>
+                                    <td><select id="p_${popS}_4_k3" onchange="window.opener.updateSheet()">${kvOpts}</select></td>
+                                    <td><select id="p_${popS}_4_v3" onchange="window.opener.updateSheet()">${kvOpts}</select></td>
+                                    <td id="p_${popS}_4_con3" class="formula-result"></td>
+                                    <td id="p_${popS}_4_d93" class="formula-result"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">सैकता</td>
+                                    <td id="p_${popS}_4_sekta" class="formula-result">0</td>
+                                    <td class="fixed-val">0</td><td class="fixed-val">0</td><td class="fixed-val">0</td><td></td><td></td>
+                                </tr>
+                                <tr class="seham-row">
+                                    <td colspan="2" id="p_${popS}_4_name" class="seham-name-cell">सहम</td>
+                                    <td id="p_${popS}_4_seh_r" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_4_seh_a" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_4_seh_k" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_4_seh_v" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_4_seh_con" class="seham-val-cell"></td>
+                                    <td id="p_${popS}_4_seh_d9" class="seham-val-cell"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            }
+
+            popupHtml += `</div></body></html>`;
+
+            let popupWin = window.open("", "_blank", "width=850,height=900,scrollbars=yes");
+            window.popupWindowInstance = popupWin;
+            popupWin.document.open();
+            popupWin.document.write(popupHtml);
+            popupWin.document.close();
+            
+            setTimeout(() => {
+                updateSheet(false);
+            }, 200);
+        }
+    </script>
+
+    <script>
+        for (let s = 1; s <= 10; s++) {
+            let pageBreakClass = ((s % 2 === 0) && s < 10) ? "print-page-break" : "";
+            
+            document.write(`
+                <div class="box-wrapper ${pageBreakClass}">
+                    <div class="set-header-row">
+                        <div class="set-title">Set ${s}</div>
+                        <div>
+                            <select id="s${s}_pravesh" class="pravesh-select" onchange="updateSheet()">
+                                <option value="दिन प्रवेश">दिन प्रवेश</option>
+                                <option value="रात प्रवेश">रात प्रवेश</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Box 1 -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>ग्रह</th>
+                                <th>राशि</th>
+                                <th>अंश</th>
+                                <th>कला</th>
+                                <th>विक</th>
+                                <th>Con</th>
+                                <th>D9</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><select id="s${s}_p1" onchange="onPlanetChange(${s}, 1)">` + getFullDropdownOptions(s === 1 ? "शुक्र" : "सूर्य") + `</select></td>
+                                <td><select id="s${s}_r1" onchange="updateSheet()">` + getRashiOptions(s === 1 ? "सिंह" : "मेष") + `</select></td>
+                                <td><select id="s${s}_a1" onchange="updateSheet()">` + getAnshOptions(27) + `</select></td>
+                                <td><select id="s${s}_k1" onchange="updateSheet()">` + getKalaVikOptions(21) + `</select></td>
+                                <td><select id="s${s}_v1" onchange="updateSheet()">` + getKalaVikOptions(36) + `</select></td>
+                                <td id="s${s}_con1" class="formula-result"></td>
+                                <td id="s${s}_d91" class="formula-result"></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><select id="s${s}_p2" onchange="onPlanetChange(${s}, 2)">` + getFullDropdownOptions(s === 1 ? "शनि" : "चंद्रमा") + `</select></td>
+                                <td><select id="s${s}_r2" onchange="updateSheet()">` + getRashiOptions(s === 1 ? "मिथुन" : "वृष") + `</select></td>
+                                <td><select id="s${s}_a2" onchange="updateSheet()">` + getAnshOptions(20) + `</select></td>
+                                <td><select id="s${s}_k2" onchange="updateSheet()">` + getKalaVikOptions(43) + `</select></td>
+                                <td><select id="s${s}_v2" onchange="updateSheet()">` + getKalaVikOptions(55) + `</select></td>
+                                <td id="s${s}_con2" class="formula-result"></td>
+                                <td id="s${s}_d92" class="formula-result"></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><select id="s${s}_p3" onchange="onPlanetChange(${s}, 3)">` + getFullDropdownOptions("लग्न") + `</select></td>
+                                <td><select id="s${s}_r3" onchange="updateSheet()">` + getRashiOptions("कुंभ") + `</select></td>
+                                <td><select id="s${s}_a3" onchange="updateSheet()">` + getAnshOptions(18) + `</select></td>
+                                <td><select id="s${s}_k3" onchange="updateSheet()">` + getKalaVikOptions(41) + `</select></td>
+                                <td><select id="s${s}_v3" onchange="updateSheet()">` + getKalaVikOptions(48) + `</select></td>
+                                <td id="s${s}_con3" class="formula-result"></td>
+                                <td id="s${s}_d93" class="formula-result"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">सैकता</td>
+                                <td id="s${s}_sekta_val" class="formula-result">1</td>
+                                <td class="fixed-val">0</td>
+                                <td class="fixed-val">0</td>
+                                <td class="fixed-val">0</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="seham-row">
+                                <td colspan="2" id="s${s}_seham_name_a" class="seham-name-cell">शुक्र, शनि और लग्न से सहम</td>
+                                <td id="s${s}_seh_r" class="seham-val-cell"></td>
+                                <td id="s${s}_seh_a" class="seham-val-cell"></td>
+                                <td id="s${s}_seh_k" class="seham-val-cell"></td>
+                                <td id="s${s}_seh_v" class="seham-val-cell"></td>
+                                <td id="s${s}_seh_con" class="seham-val-cell"></td>
+                                <td id="s${s}_seh_d9" class="seham-val-cell"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Box 2 -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>स्वैप</th>
+                                <th>ग्रह</th>
+                                <th>राशि</th>
+                                <th>अंश</th>
+                                <th>कला</th>
+                                <th>विक</th>
+                                <th>Con</th>
+                                <th>D9</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="yellow-bg">
+                                    <select id="s${s}_map1" onchange="updateSheet()" class="yellow-bg red-text">
+                                        <option value="1">1</option>
+                                        <option value="2" selected>2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </td>
+                                <td id="s${s}_bp1" class="auto-cell">शनि</td>
+                                <td id="s${s}_br1" class="auto-cell"></td>
+                                <td id="s${s}_ba1" class="auto-cell"></td>
+                                <td id="s${s}_bk1" class="auto-cell"></td>
+                                <td id="s${s}_bv1" class="auto-cell"></td>
+                                <td id="s${s}_bcon1" class="formula-result"></td>
+                                <td id="s${s}_bd91" class="formula-result"></td>
+                            </tr>
+                            <tr>
+                                <td class="yellow-bg">
+                                    <select id="s${s}_map2" onchange="updateSheet()" class="yellow-bg red-text">
+                                        <option value="1" selected>1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </td>
+                                <td id="s${s}_bp2" class="auto-cell">शुक्र</td>
+                                <td id="s${s}_br2" class="auto-cell"></td>
+                                <td id="s${s}_ba2" class="auto-cell"></td>
+                                <td id="s${s}_bk2" class="auto-cell"></td>
+                                <td id="s${s}_bv2" class="auto-cell"></td>
+                                <td id="s${s}_bcon2" class="formula-result"></td>
+                                <td id="s${s}_bd92" class="formula-result"></td>
+                            </tr>
+                            <tr>
+                                <td class="yellow-bg">
+                                    <select id="s${s}_map3" onchange="updateSheet()" class="yellow-bg red-text">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3" selected>3</option>
+                                    </select>
+                                </td>
+                                <td id="s${s}_bp3" class="auto-cell">लग्न</td>
+                                <td id="s${s}_br3" class="auto-cell"></td>
+                                <td id="s${s}_ba3" class="auto-cell"></td>
+                                <td id="s${s}_bk3" class="auto-cell"></td>
+                                <td id="s${s}_bv3" class="auto-cell"></td>
+                                <td id="s${s}_bcon3" class="formula-result"></td>
+                                <td id="s${s}_bd93" class="formula-result"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">सैकता</td>
+                                <td id="s${s}_bsekta_val" class="formula-result">0</td>
+                                <td class="fixed-val">0</td>
+                                <td class="fixed-val">0</td>
+                                <td class="fixed-val">0</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="seham-row">
+                                <td colspan="2" id="s${s}_seham_name_b" class="seham-name-cell">शुक्र, शनि और लग्न से सहम</td>
+                                <td id="s${s}_bseh_r" class="seham-val-cell"></td>
+                                <td id="s${s}_bseh_a" class="seham-val-cell"></td>
+                                <td id="s${s}_bseh_k" class="seham-val-cell"></td>
+                                <td id="s${s}_bseh_v" class="seham-val-cell"></td>
+                                <td id="s${s}_bseh_con" class="seham-val-cell"></td>
+                                <td id="s${s}_bseh_d9" class="seham-val-cell"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `);
+        }
+    </script>
+
+</div>
+
+<script>
+    loadLastDataOnStart();
+    updateSheet(false);
+</script>
+
+</body>
+</html>
